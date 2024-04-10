@@ -14,5 +14,5 @@ export default defineConfig({
       },
     },
   },
-  base: HOSTNAME,
+  base: "https://docter-app-backend.onrender.com/",
 });

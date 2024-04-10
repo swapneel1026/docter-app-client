@@ -21,7 +21,7 @@ function FindBookings() {
 
   const FetchBooking = async () => {
     const bookingDetails = await fetch(
-      `http://localhost:8000/api/booking/${
+      `/api/booking/${
         userDetails?.userType === "User"
           ? "findbookinguser"
           : "findbookingdocter"
