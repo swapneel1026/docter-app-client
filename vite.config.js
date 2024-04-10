@@ -8,10 +8,11 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: HOSTNAME, // This is just a placeholder, it will be overridden by setupProxy.js
+        target: HOSTNAME,
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
+        // rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },
+  base: HOSTNAME,
 });
