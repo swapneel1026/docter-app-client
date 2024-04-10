@@ -1,0 +1,75 @@
+import { useEffect } from "react";
+import { getUser } from "../helperFunctions/getUser";
+import { Avatar, Grid, Paper, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
+const Profile = () => {
+  const userDetails = getUser();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (userDetails === null) {
+      navigate("/signin");
+    }
+  }, []);
+
+  return (
+    <>
+      {userDetails && userDetails?.userType === "Docter" ? (
+        <Paper sx={{ p: 3, width: "100%", maxWidth: 800, margin: "auto" }}>
+          <Grid container spacing={2} alignItems="center">
+            <Grid item xs={12} sm={4} md={3}>
+              <Avatar
+                alt={userDetails?.name}
+                src={userDetails?.profileImage}
+                sx={{ width: 150, height: 150 }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={8} md={9}>
+              <Typography gutterBottom variant="h5">
+                {userDetails?.name}
+              </Typography>
+              <Typography variant="subtitle1">{userDetails?.email}</Typography>
+              <Typography variant="body2">
+                Specialization: {userDetails?.specialization.join(", ")}
+              </Typography>
+              <Typography variant="body2">
+                Experience: {userDetails?.experience} years
+              </Typography>
+              <Typography variant="body2">
+                Location: {userDetails?.currentLivingCity},{" "}
+                {userDetails?.currentLivingState}
+              </Typography>
+              <Typography variant="body2">
+                User Type: {userDetails?.userType}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Paper>
+      ) : (
+        userDetails && (
+          <Paper sx={{ p: 3, width: "100%", maxWidth: 800, margin: "auto" }}>
+            <Grid container spacing={2} alignItems="center">
+              <Grid item xs={12} sm={4} md={3}>
+                <Avatar
+                  alt={userDetails?.name}
+                  src={userDetails?.profileImage}
+                  sx={{ width: 150, height: 150 }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={8} md={9}>
+                <Typography gutterBottom variant="h5">
+                  {userDetails?.name}
+                </Typography>
+                <Typography variant="subtitle1">
+                  {userDetails?.email}
+                </Typography>
+              </Grid>
+            </Grid>
+          </Paper>
+        )
+      )}
+    </>
+  );
+};
+
+export default Profile;
