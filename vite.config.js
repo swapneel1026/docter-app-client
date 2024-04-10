@@ -1,27 +1,16 @@
 import { defineConfig } from "vite";
-import { createProxy } from "vite-plugin-proxy";
 import react from "@vitejs/plugin-react-swc";
 
 // https://vitejs.dev/config/
 const HOSTNAME = "https://docter-app-backend.onrender.com";
 export default defineConfig({
-  plugins: [
-    react(),
-    createProxy({
-      "/api": {
-        target: "https://docter-app-backend.onrender.com",
-        changeOrigin: true,
-        secure: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
-      },
-    }),
-  ],
+  plugins: [react()],
   server: {
     proxy: {
       "/api": {
-        target: HOSTNAME || "http://localhost:8000",
+        target: HOSTNAME, // This is just a placeholder, it will be overridden by setupProxy.js
         changeOrigin: true,
-        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },
