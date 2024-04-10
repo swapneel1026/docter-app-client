@@ -10,7 +10,7 @@ export default defineConfig({
       "/api": {
         target: HOSTNAME,
         changeOrigin: true,
-        // rewrite: (path) => path.replace(/^\/api/, ""),
+        rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },
