@@ -10,9 +10,8 @@ export default defineConfig({
       "/api": {
         target: HOSTNAME,
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },
-  base: "https://docter-app-backend.onrender.com/",
+  base: "https://docter-app-client.vercel.app/",
 });
