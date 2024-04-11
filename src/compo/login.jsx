@@ -12,12 +12,12 @@ const Signin = () => {
   const userDetails = getUser();
   const navigate = useNavigate();
 
-  const API_URL =
-    import.meta.env.VITE_ENV === "production"
-      ? import.meta.env.VITE_PROD_BASE_URL
-      : import.meta.env.VITE_DEV_BASE_URL;
+  // const API_URL =
+  //   import.meta.env.VITE_ENV === "production"
+  //     ? import.meta.env.VITE_PROD_BASE_URL
+  //     : import.meta.env.VITE_DEV_BASE_URL;
   const GetUser = async () => {
-    await fetch(`${API_URL}api/${typeofUser}/signin`, {
+    await fetch(`${import.meta.env.VITE_HOST_NAME}/api/${typeofUser}/signin`, {
       headers: {
         "Content-Type": "application/json",
       },
