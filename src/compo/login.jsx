@@ -38,8 +38,8 @@ const Signin = () => {
         const response = await res.json();
 
         if (response.success) {
-          // navigate(0);
-          // navigate("/dashboard");
+          navigate(0);
+          navigate("/dashboard");
         }
       })
       .catch((err) => {
