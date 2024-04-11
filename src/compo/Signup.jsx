@@ -7,9 +7,13 @@ const Signup = () => {
   const [formType, setFormType] = useState("user");
   const navigate = useNavigate();
 
+  const API_URL =
+    import.meta.env.VITE_ENV === "production"
+      ? import.meta.env.VITE_PROD_BASE_URL
+      : import.meta.env.VITE_DEV_BASE_URL;
+  console.log(API_URL, "au");
   const PostUser = async (data) => {
-    console.log(data);
-    await fetch(`${import.meta.env.VITE_HOST_NAME}/api/${formType}/signup`, {
+    await fetch(`${API_URL}/api/${formType}/signup`, {
       mode: "cors",
       body: data,
       method: "POST",
