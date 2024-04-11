@@ -11,7 +11,6 @@ const Signin = () => {
   const [typeofUser, settypeofUser] = useState("");
   const userDetails = getUser();
   const navigate = useNavigate();
-  console.log(import.meta.env.VITE_HOST_NAME);
 
   const GetUser = async () => {
     await fetch(`${import.meta.env.VITE_HOST_NAME}/api/${typeofUser}/signin`, {
@@ -25,12 +24,13 @@ const Signin = () => {
       .then(async (res) => {
         if (res.headers.has("Set-Cookie")) {
           const cookie = res.headers.getSetCookie("Set-Cookie");
+          console.log(cookie, "cookie");
           document.cookie = cookie;
         }
         const response = await res.json();
         if (response.success) {
-          // navigate(0);
-          // navigate("/dashboard");
+          navigate(0);
+          navigate("/dashboard");
         }
       })
       .catch((err) => {
