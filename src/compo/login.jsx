@@ -11,9 +11,11 @@ const Signin = () => {
   const [typeofUser, settypeofUser] = useState("");
   const userDetails = getUser();
   const navigate = useNavigate();
+  console.log(import.meta.env.VITE_HOST_NAME);
 
   const GetUser = async () => {
-    await fetch(`/api/${typeofUser}/signin`, {
+    await fetch(`${import.meta.env.VITE_HOST_NAME}/api/${typeofUser}/signin`, {
+      mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },

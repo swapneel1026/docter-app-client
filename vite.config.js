@@ -5,12 +5,12 @@ import react from "@vitejs/plugin-react-swc";
 
 export default defineConfig({
   plugins: [react()],
-  server: {
-    proxy: {
-      "/api": {
-        target: "https://docter-app-backend.onrender.com",
-        changeOrigin: true,
-      },
-    },
-  },
+  // server: {
+  //   proxy: {
+  //     "/api": {
+  //       target: "https://docter-app-backend.onrender.com",
+  //       changeOrigin: true,
+  //     },
+  //   },
+  // },
 });

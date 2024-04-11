@@ -9,7 +9,7 @@ const Signup = () => {
 
   const PostUser = async (data) => {
     console.log(data);
-    await fetch(`/api/${formType}/signup`, {
+    await fetch(`${import.meta.env.VITE_HOST_NAME}/api/${formType}/signup`, {
       mode: "cors",
       body: data,
       method: "POST",

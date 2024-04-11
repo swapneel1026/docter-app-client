@@ -21,7 +21,7 @@ function FindBookings() {
 
   const FetchBooking = async () => {
     const bookingDetails = await fetch(
-      `/api/booking/${
+      `${import.meta.env.VITE_HOST_NAME}/api/booking/${
         userDetails?.userType === "User"
           ? "findbookinguser"
           : "findbookingdocter"

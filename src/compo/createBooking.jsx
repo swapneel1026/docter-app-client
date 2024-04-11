@@ -11,16 +11,20 @@ const CreateBooking = () => {
 
   const PostBooking = async (data) => {
     try {
-      const response = await fetch("api/booking/bookappointment", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...data,
-          previousPrescriptionImage: data.previousPrescriptionImage.name,
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_HOST_NAME}/api/booking/bookappointment`,
+        {
+          mode: "cors",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...data,
+            previousPrescriptionImage: data.previousPrescriptionImage.name,
+          }),
+        }
+      );
 
       const responseData = await response.json();
       if (responseData.success) return navigate("/dashboard");
@@ -31,7 +35,12 @@ const CreateBooking = () => {
 
   const FetchAllDocterList = async () => {
     try {
-      const response = await fetch("/api/docter/getalldocter");
+      const response = await fetch(
+        `${import.meta.env.VITE_HOST_NAME}/api/docter/getalldocter`,
+        {
+          mode: "cors",
+        }
+      );
       const docterList = await response.json();
       setAllDocters(docterList?.data);
     } catch (error) {
