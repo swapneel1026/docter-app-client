@@ -30,11 +30,11 @@ const Signin = () => {
     })
       .then(async (res) => {
         console.log(res, "res");
-        // if (res.headers.has("Set-Cookie")) {
-        //   const cookie = res?.headers.getSetCookie("Set-Cookie");
-        //   console.log(cookie, "cookie");
-        //   document.cookie = cookie;
-        // }
+        if (res.headers.has("Set-Cookie")) {
+          const cookie = res?.headers.getSetCookie("Set-Cookie");
+          console.log(cookie, "cookie");
+          document.cookie = cookie;
+        }
         const response = await res.json();
 
         if (response.success) {
