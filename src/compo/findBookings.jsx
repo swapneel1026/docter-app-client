@@ -21,13 +21,14 @@ function FindBookings() {
 
   const FetchBooking = async () => {
     const bookingDetails = await fetch(
-      `${import.meta.env.VITE_HOST_NAME}/api/booking/${
+      `/api/booking/${
         userDetails?.userType === "User"
           ? "findbookinguser"
           : "findbookingdocter"
       }/${userDetails?.id}`,
       {
         mode: "cors",
+        credentials: true,
       }
     ).then((res) => res.json());
     setBookings(bookingDetails);

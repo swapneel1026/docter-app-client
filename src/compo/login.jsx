@@ -12,25 +12,32 @@ const Signin = () => {
   const userDetails = getUser();
   const navigate = useNavigate();
 
+  const API_URL =
+    import.meta.env.VITE_ENV === "production"
+      ? import.meta.env.VITE_PROD_BASE_URL
+      : import.meta.env.VITE_DEV_BASE_URL;
   const GetUser = async () => {
-    await fetch(`${import.meta.env.VITE_HOST_NAME}/api/${typeofUser}/signin`, {
-      mode: "cors",
+    await fetch(`${API_URL}api/${typeofUser}/signin`, {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
+
       body: JSON.stringify({ email, password }),
       method: "POST",
     })
       .then(async (res) => {
-        if (res.headers.has("Set-Cookie")) {
-          const cookie = res.headers.getSetCookie("Set-Cookie");
-          console.log(cookie, "cookie");
-          document.cookie = cookie;
-        }
+        console.log(res, "res");
+        // if (res.headers.has("Set-Cookie")) {
+        //   const cookie = res?.headers.getSetCookie("Set-Cookie");
+        //   console.log(cookie, "cookie");
+        //   document.cookie = cookie;
+        // }
         const response = await res.json();
+
         if (response.success) {
-          navigate(0);
-          navigate("/dashboard");
+          // navigate(0);
+          // navigate("/dashboard");
         }
       })
       .catch((err) => {
