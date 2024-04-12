@@ -3,59 +3,54 @@ import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { getUser } from "../helperFunctions/getUser";
+import { setCookieToLocalStorage } from "../helperFunctions/setToken";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [typeofUser, settypeofUser] = useState("");
-  const userDetails = getUser();
+
   const navigate = useNavigate();
 
-  const API_URL =
-    import.meta.env.VITE_ENV === "production"
-      ? import.meta.env.VITE_PROD_BASE_URL
-      : import.meta.env.VITE_DEV_BASE_URL;
-  console.log(API_URL, "au");
   const GetUser = async () => {
-    await fetch(`${API_URL}/api/${typeofUser}/signin`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      mode: "cors",
-      credentials: "include",
+    const API_URL =
+      import.meta.env.VITE_ENV === "production"
+        ? import.meta.env.VITE_PROD_BASE_URL
+        : import.meta.env.VITE_DEV_BASE_URL;
+    try {
+      const res = await fetch(`${API_URL}/api/${typeofUser}/signin`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "cors",
+        credentials: "include",
 
-      body: JSON.stringify({ email, password }),
-      method: "POST",
-    })
-      .then(async (res) => {
-        console.log(res, "res");
-        if (res.headers.has("Set-Cookie")) {
-          const cookie = res?.headers.getSetCookie("Set-Cookie");
-          console.log(cookie, "cookie");
-          document.cookie = cookie;
-        }
-        const response = await res.json();
-
-        if (response.success) {
-          // navigate(0);
-          // navigate("/dashboard");
-        }
-      })
-      .catch((err) => {
-        console.log(err.message);
+        body: JSON.stringify({ email, password }),
+        method: "POST",
       });
+      if (res.ok) {
+        const response = await res.json();
+        if (response?.success) {
+          setCookieToLocalStorage();
+          location.replace("/dashboard");
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const handleUserSignin = (e) => {
     e.preventDefault();
     GetUser();
   };
+
   useEffect(() => {
-    if (userDetails !== null) {
-      navigate("/dashboard");
+    const tokenDetails = localStorage.getItem("tokenDetails");
+    if (tokenDetails) {
+      location.replace("/dashboard");
     }
-  }, []);
+  }, [navigate]);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-600 border border-black">

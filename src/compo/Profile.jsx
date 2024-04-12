@@ -1,16 +1,17 @@
-import { useEffect } from "react";
-import { getUser } from "../helperFunctions/getUser";
+import { useEffect, useState } from "react";
 import { Avatar, Grid, Paper, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { getPayload } from "../helperFunctions/getPayload";
 
 const Profile = () => {
-  const userDetails = getUser();
+  const [userDetails] = useState(getPayload());
   const navigate = useNavigate();
+
   useEffect(() => {
-    if (userDetails === null) {
-      navigate("/signin");
+    if (localStorage.getItem("tokenDetails") === null) {
+      location.replace("/signin");
     }
-  }, []);
+  }, [navigate]);
 
   return (
     <>

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { getUser } from "../helperFunctions/getUser";
 import {
   Button,
   FormControl,
@@ -9,26 +8,31 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import { getPayload } from "../helperFunctions/getPayload";
 
 function FindBookings() {
   const [bookings, setBookings] = useState(null);
-  const [userDetails] = useState(getUser());
-  const navigate = useNavigate();
-
   // eslint-disable-next-line no-unused-vars
   const [bookingStatus, setBookingStatus] = useState("");
-  // console.log(userDetails);
+  const [userDetails] = useState(getPayload());
+
+  console.log(userDetails, "udg");
+
+  const navigate = useNavigate();
 
   const FetchBooking = async () => {
+    const API_URL =
+      import.meta.env.VITE_ENV === "production"
+        ? import.meta.env.VITE_PROD_BASE_URL
+        : import.meta.env.VITE_DEV_BASE_URL;
     const bookingDetails = await fetch(
-      `/api/booking/${
+      `${API_URL}/api/booking/${
         userDetails?.userType === "User"
           ? "findbookinguser"
           : "findbookingdocter"
       }/${userDetails?.id}`,
       {
         mode: "cors",
-        credentials: true,
       }
     ).then((res) => res.json());
     setBookings(bookingDetails);
@@ -39,7 +43,6 @@ function FindBookings() {
     setBookingStatus((prevStatus) => {
       return newStatus;
     });
-    console.log(newStatus, bookingId, "bs");
     try {
       const response = await fetch(`/api/booking/updatestatus/${bookingId}`, {
         method: "PATCH",
@@ -58,12 +61,15 @@ function FindBookings() {
     }
   };
   useEffect(() => {
-    if (userDetails === null) {
+    if (!localStorage.getItem("tokenDetails")) {
       navigate("/signin");
     }
-    FetchBooking();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate, userDetails]);
+
+  useEffect(() => {
+    FetchBooking();
+  }, []);
+
   return (
     <>
       {/* USER VIEW */}

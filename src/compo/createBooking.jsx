@@ -1,30 +1,31 @@
 import { useEffect, useState } from "react";
-import { getUser } from "../helperFunctions/getUser";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import { getPayload } from "../helperFunctions/getPayload";
 
 const CreateBooking = () => {
-  const [userDetails] = useState(getUser());
   const [allDocters, setAllDocters] = useState([]);
-  const navigate = useNavigate();
+  const [userDetails] = useState(getPayload());
 
+  const navigate = useNavigate();
+  const API_URL =
+    import.meta.env.VITE_ENV === "production"
+      ? import.meta.env.VITE_PROD_BASE_URL
+      : import.meta.env.VITE_DEV_BASE_URL;
   const PostBooking = async (data) => {
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_HOST_NAME}/api/booking/bookappointment`,
-        {
-          mode: "cors",
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ...data,
-            previousPrescriptionImage: data.previousPrescriptionImage.name,
-          }),
-        }
-      );
+      const response = await fetch(`${API_URL}/api/booking/bookappointment`, {
+        mode: "cors",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...data,
+          previousPrescriptionImage: data.previousPrescriptionImage.name,
+        }),
+      });
 
       const responseData = await response.json();
       if (responseData.success) return navigate("/dashboard");
@@ -35,12 +36,9 @@ const CreateBooking = () => {
 
   const FetchAllDocterList = async () => {
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_HOST_NAME}/api/docter/getalldocter`,
-        {
-          mode: "cors",
-        }
-      );
+      const response = await fetch(`${API_URL}/api/docter/getalldocter`, {
+        mode: "cors",
+      });
       const docterList = await response.json();
       setAllDocters(docterList?.data);
     } catch (error) {
@@ -49,7 +47,7 @@ const CreateBooking = () => {
   };
 
   useEffect(() => {
-    if (userDetails === null) {
+    if (!userDetails) {
       navigate("/signin");
     }
     if (userDetails?.userType === "Docter") {

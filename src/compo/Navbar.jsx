@@ -11,53 +11,59 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { getUser } from "../helperFunctions/getUser";
 import { useState } from "react";
+import { getPayload } from "../helperFunctions/getPayload";
 import Cookies from "js-cookie";
 
-const userDetails = getUser();
-
-const pages = [
-  {
-    page: "Create Booking",
-    Pagepath: "/createbooking",
-    signinView: true,
-    createBookingView: userDetails?.userType === "Docter" ? false : true,
-  },
-  {
-    page: "My Bookings",
-    Pagepath: "/dashboard",
-    signinView: true,
-    createBookingView: true,
-  },
-  {
-    page: "Sign-In",
-    Pagepath: "/signin",
-    signinView: userDetails?.name ? false : true,
-    createBookingView: true,
-  },
-  {
-    page: "Sign-up",
-    Pagepath: "/signup",
-    signinView: true,
-    createBookingView: true,
-  },
-];
-const settings = [
-  {
-    setting: "Profile",
-    path: "/profile",
-  },
-  {
-    setting: "Logout",
-    action: () => {
-      Cookies.remove("token");
-      window.location.reload();
-    },
-  },
-];
-
 function Navbar() {
+  const [userDetails] = useState(getPayload());
+  const pages = [
+    {
+      page: "Create Booking",
+      Pagepath: "/createbooking",
+      signinView: true,
+      createBookingView: userDetails?.userType === "Docter" ? false : true,
+    },
+    {
+      page: "My Bookings",
+      Pagepath: "/dashboard",
+      signinView: true,
+      createBookingView: true,
+    },
+    {
+      page: "Sign-In",
+      Pagepath: "/signin",
+      signinView: userDetails?.name ? false : true,
+      createBookingView: true,
+    },
+    {
+      page: "Sign-up",
+      Pagepath: "/signup",
+      signinView: true,
+      createBookingView: true,
+    },
+  ];
+  const settings = [
+    {
+      setting: "Profile",
+      path: "/profile",
+    },
+    {
+      setting: "Logout",
+      action: () => {
+        localStorage.removeItem("tokenDetails");
+        location.replace("/signin");
+        Cookies.remove("token", {
+          secure: true,
+          sameSite: "none",
+          path: "/",
+          domain: "localhost",
+          expires: 12000000,
+        });
+      },
+    },
+  ];
+
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElMenu, setAnchorElMenu] = useState(null);
 
