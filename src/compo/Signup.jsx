@@ -49,7 +49,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-200">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-600 border border-black">
       <div className="flex flex-col items-center justify-center w-full max-w-md px-4 py-8 bg-white rounded-lg shadow-lg">
         <h1 className="mb-8 text-4xl font-bold text-teal-600">
           SignUp {formType === "user" ? "(User)" : "(Docter)"}
