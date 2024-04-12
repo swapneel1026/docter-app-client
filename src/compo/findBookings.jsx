@@ -58,6 +58,7 @@ function FindBookings() {
         throw new Error("Failed to update status");
       }
       console.log("Status updated successfully:", newStatus);
+      FetchBooking();
     } catch (error) {
       console.error("Error updating status:", error.message);
     }
