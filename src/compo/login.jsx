@@ -45,6 +45,7 @@ const Signin = () => {
       } else {
         const response = await res.json();
         toast(response.msg);
+        setLoader(false);
       }
     } catch (error) {
       toast(error);

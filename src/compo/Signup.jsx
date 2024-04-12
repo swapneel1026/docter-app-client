@@ -33,9 +33,11 @@ const Signup = () => {
         toast("Email already exists!");
       } else if (response?.error) {
         toast(response?.error);
+        setLoader(false);
       }
     } catch (error) {
       toast(error.code);
+      setLoader(false);
     }
   };
 

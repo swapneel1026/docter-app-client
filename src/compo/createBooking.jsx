@@ -37,6 +37,7 @@ const CreateBooking = () => {
         setLoader(false);
       }
     } catch (error) {
+      setLoader(false);
       toast("Error:", error);
     }
   };
