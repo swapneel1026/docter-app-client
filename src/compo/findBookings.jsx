@@ -10,12 +10,14 @@ import { useNavigate } from "react-router-dom";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { getPayload } from "../helperFunctions/getPayload";
 import { toast } from "sonner";
+import CircleLoader from "./loader";
 
 function FindBookings() {
   const [bookings, setBookings] = useState(null);
   // eslint-disable-next-line no-unused-vars
   const [bookingStatus, setBookingStatus] = useState("");
   const [userDetails] = useState(getPayload());
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -24,7 +26,7 @@ function FindBookings() {
       ? import.meta.env.VITE_PROD_BASE_URL
       : import.meta.env.VITE_DEV_BASE_URL;
   const FetchBooking = async () => {
-    const bookingDetails = await fetch(
+    const res = await fetch(
       `${API_URL}/api/booking/${
         userDetails?.userType === "User"
           ? "findbookinguser"
@@ -33,7 +35,8 @@ function FindBookings() {
       {
         mode: "cors",
       }
-    ).then((res) => res.json());
+    );
+    const bookingDetails = await res.json();
     setBookings(bookingDetails);
   };
   const handleStatusChange = async (bookingId, e) => {
@@ -84,12 +87,16 @@ function FindBookings() {
             <Button
               className="flex gap-2"
               onClick={() => {
+                setLoading(true);
+                setTimeout(() => {
+                  setLoading(false);
+                }, 2000);
                 FetchBooking();
               }}
               variant="contained"
             >
               Refresh
-              <RefreshIcon />
+              {loading ? <CircleLoader /> : <RefreshIcon />}
             </Button>
           </div>
           <table className="w-full table-auto">
@@ -155,12 +162,16 @@ function FindBookings() {
             <Button
               className="flex gap-2"
               onClick={() => {
+                setLoading(true);
+                setTimeout(() => {
+                  setLoading(false);
+                }, 2000);
                 FetchBooking();
               }}
               variant="contained"
             >
               Refresh
-              <RefreshIcon />
+              {loading ? <CircleLoader /> : <RefreshIcon />}
             </Button>
           </div>
           <table className="w-full table-auto">

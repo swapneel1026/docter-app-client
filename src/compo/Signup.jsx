@@ -3,16 +3,18 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import CircleLoader from "./loader";
 
 const Signup = () => {
   const [formType, setFormType] = useState("user");
+  const [loader, setLoader] = useState(false);
+
   const navigate = useNavigate();
 
   const API_URL =
     import.meta.env.VITE_ENV === "production"
       ? import.meta.env.VITE_PROD_BASE_URL
       : import.meta.env.VITE_DEV_BASE_URL;
-  console.log(API_URL, "au");
   const PostUser = async (data) => {
     try {
       const res = await fetch(`${API_URL}/api/${formType}/signup`, {
@@ -23,6 +25,7 @@ const Signup = () => {
 
       const response = await res.json();
       if (response.success) {
+        setLoader(false);
         toast("Succesfully signed up!");
         navigate("/signin");
       }
@@ -38,9 +41,9 @@ const Signup = () => {
 
   const handleNewUserSignup = (e) => {
     e.preventDefault();
-    // const docterPayload = new FormData(e.target);
     const userPayload = new FormData(e.target);
     PostUser(userPayload);
+    setLoader(true);
   };
 
   return (
@@ -140,8 +143,14 @@ const Signup = () => {
             Upload Profile Image
           </label>
           <input type="file" name="profileImage" id="profileImage" />
-          <Button variant="contained" type="submit" color="primary" fullWidth>
-            SignUp
+          <Button
+            // onClick={() => setLoader(true)}
+            variant="contained"
+            type="submit"
+            color="primary"
+            fullWidth
+          >
+            {loader ? <CircleLoader /> : "Signup"}
           </Button>
         </form>
       </div>

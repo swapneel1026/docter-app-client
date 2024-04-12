@@ -5,11 +5,13 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { setCookieToLocalStorage } from "../helperFunctions/setToken";
 import { toast } from "sonner";
+import CircleLoader from "./loader";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [typeofUser, settypeofUser] = useState("");
+  const [loader, setLoader] = useState(false);
 
   const navigate = useNavigate();
 
@@ -34,6 +36,7 @@ const Signin = () => {
         if (response?.success) {
           const cookieRes = await setCookieToLocalStorage();
           const data = cookieRes;
+          setLoader(false);
           if (data) {
             toast("Welcome to BookDocter");
             location.replace("/dashboard");
@@ -51,6 +54,7 @@ const Signin = () => {
   const handleUserSignin = (e) => {
     e.preventDefault();
     GetUser();
+    setLoader(true);
   };
 
   useEffect(() => {
@@ -98,7 +102,7 @@ const Signin = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button variant="contained" type="submit" color="inherit">
-          SignIn
+          {loader ? <CircleLoader /> : "Signin"}
         </Button>
       </form>
     </div>

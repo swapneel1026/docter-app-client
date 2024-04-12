@@ -4,10 +4,12 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { getPayload } from "../helperFunctions/getPayload";
 import { toast } from "sonner";
+import CircleLoader from "./loader";
 
 const CreateBooking = () => {
   const [allDocters, setAllDocters] = useState([]);
   const [userDetails] = useState(getPayload());
+  const [loader, setLoader] = useState(false);
 
   const navigate = useNavigate();
   const API_URL =
@@ -32,6 +34,7 @@ const CreateBooking = () => {
       if (responseData.success) {
         toast("Booking Successful!");
         navigate("/dashboard");
+        setLoader(false);
       }
     } catch (error) {
       toast("Error:", error);
@@ -75,6 +78,7 @@ const CreateBooking = () => {
     };
 
     PostBooking(data);
+    setLoader(true);
   };
 
   return (
@@ -182,7 +186,7 @@ const CreateBooking = () => {
               />
             </Box>
             <Button variant="contained" type="submit" color="primary">
-              Book
+              {loader ? <CircleLoader /> : "book"}
             </Button>
           </form>
         </div>
