@@ -20,11 +20,11 @@ function FindBookings() {
 
   const navigate = useNavigate();
 
+  const API_URL =
+    import.meta.env.VITE_ENV === "production"
+      ? import.meta.env.VITE_PROD_BASE_URL
+      : import.meta.env.VITE_DEV_BASE_URL;
   const FetchBooking = async () => {
-    const API_URL =
-      import.meta.env.VITE_ENV === "production"
-        ? import.meta.env.VITE_PROD_BASE_URL
-        : import.meta.env.VITE_DEV_BASE_URL;
     const bookingDetails = await fetch(
       `${API_URL}/api/booking/${
         userDetails?.userType === "User"
@@ -44,14 +44,18 @@ function FindBookings() {
       return newStatus;
     });
     try {
-      const response = await fetch(`/api/booking/updatestatus/${bookingId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ bookingStatus: newStatus }),
-      });
+      const response = await fetch(
+        `${API_URL}/api/booking/updatestatus/${bookingId}`,
+        {
+          mode: "cors",
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({ bookingStatus: newStatus }),
+        }
+      );
       if (!response.ok) {
         throw new Error("Failed to update status");
       }
