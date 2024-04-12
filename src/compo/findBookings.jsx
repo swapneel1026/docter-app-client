@@ -49,6 +49,7 @@ function FindBookings() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({ bookingStatus: newStatus }),
       });
       if (!response.ok) {
