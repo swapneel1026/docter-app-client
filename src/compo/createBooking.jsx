@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { getPayload } from "../helperFunctions/getPayload";
+import { toast } from "sonner";
 
 const CreateBooking = () => {
   const [allDocters, setAllDocters] = useState([]);
@@ -28,9 +29,12 @@ const CreateBooking = () => {
       });
 
       const responseData = await response.json();
-      if (responseData.success) return navigate("/dashboard");
+      if (responseData.success) {
+        toast("Booking Successful!");
+        navigate("/dashboard");
+      }
     } catch (error) {
-      console.error("Error:", error);
+      toast("Error:", error);
     }
   };
 
@@ -42,7 +46,7 @@ const CreateBooking = () => {
       const docterList = await response.json();
       setAllDocters(docterList?.data);
     } catch (error) {
-      console.log(error);
+      toast(error);
     }
   };
 
@@ -89,7 +93,13 @@ const CreateBooking = () => {
               <label htmlFor="date" className="text-gray-700">
                 Pick a date
               </label>
-              <input type="date" name="date" id="date" className="input" />
+              <input
+                type="date"
+                name="date"
+                id="date"
+                className="input"
+                required
+              />
             </Box>
             <Box className="flex flex-col w-full gap-4">
               <label htmlFor="docteroption" className="text-gray-700">
@@ -120,6 +130,7 @@ const CreateBooking = () => {
                 name="reason"
                 id="reason"
                 rows="3"
+                required
                 className="resize-none input"
               ></textarea>
             </Box>

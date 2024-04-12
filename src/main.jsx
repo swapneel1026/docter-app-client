@@ -8,6 +8,7 @@ import Signin from "./compo/login.jsx";
 import CreateBooking from "./compo/createBooking.jsx";
 import Navbar from "./compo/Navbar.jsx";
 import Profile from "./compo/Profile.jsx";
+import { Toaster } from "sonner";
 
 const router = createBrowserRouter(
   [
@@ -40,6 +41,7 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
     <Navbar />
+    <Toaster position="top-right" />
     <RouterProvider router={router} />
   </>
 );

@@ -2,6 +2,7 @@ import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const Signup = () => {
   const [formType, setFormType] = useState("user");
@@ -13,18 +14,26 @@ const Signup = () => {
       : import.meta.env.VITE_DEV_BASE_URL;
   console.log(API_URL, "au");
   const PostUser = async (data) => {
-    await fetch(`${API_URL}/api/${formType}/signup`, {
-      mode: "cors",
-      body: data,
-      method: "POST",
-    })
-      .then(async (res) => {
-        const response = await res.json();
-        if (response.success) navigate("/signin");
-      })
-      .catch((err) => {
-        console.log(err.message);
+    try {
+      const res = await fetch(`${API_URL}/api/${formType}/signup`, {
+        mode: "cors",
+        body: data,
+        method: "POST",
       });
+
+      const response = await res.json();
+      if (response.success) {
+        toast("Succesfully signed up!");
+        navigate("/signin");
+      }
+      if (response?.error?.code === 11000) {
+        toast("Email already exists!");
+      } else if (response?.error) {
+        toast(response?.error);
+      }
+    } catch (error) {
+      toast(error.code);
+    }
   };
 
   const handleNewUserSignup = (e) => {

@@ -1,3 +1,5 @@
+import { toast } from "sonner";
+
 export async function setCookieToLocalStorage() {
   const API_URL =
     import.meta.env.VITE_ENV === "production"
@@ -10,7 +12,7 @@ export async function setCookieToLocalStorage() {
     });
 
     if (!res.ok) {
-      throw new Error("Failed to fetch user details");
+      toast("Failed to fetch user details");
     }
 
     const token = await res.json();
@@ -28,7 +30,7 @@ export async function setCookieToLocalStorage() {
       return true;
     }
   } catch (error) {
-    console.error("Error fetching user details:", error);
+    toast("Error fetching user details:", error);
     return null;
   }
 }

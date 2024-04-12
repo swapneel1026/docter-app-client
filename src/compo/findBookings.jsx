@@ -9,6 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { getPayload } from "../helperFunctions/getPayload";
+import { toast } from "sonner";
 
 function FindBookings() {
   const [bookings, setBookings] = useState(null);
@@ -55,12 +56,12 @@ function FindBookings() {
         }
       );
       if (!response.ok) {
-        throw new Error("Failed to update status");
+        toast("Failed to update status");
       }
-      console.log("Status updated successfully:", newStatus);
+      toast("Status updated successfully to " + newStatus);
       FetchBooking();
     } catch (error) {
-      console.error("Error updating status:", error.message);
+      toast("Error updating status:", error.message);
     }
   };
   useEffect(() => {

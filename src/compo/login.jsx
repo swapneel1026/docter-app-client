@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { setCookieToLocalStorage } from "../helperFunctions/setToken";
+import { toast } from "sonner";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
@@ -34,12 +35,16 @@ const Signin = () => {
           const cookieRes = await setCookieToLocalStorage();
           const data = cookieRes;
           if (data) {
+            toast("Welcome to BookDocter");
             location.replace("/dashboard");
           }
         }
+      } else {
+        const response = await res.json();
+        toast(response.msg);
       }
     } catch (error) {
-      console.log(error.message);
+      toast(error);
     }
   };
 
