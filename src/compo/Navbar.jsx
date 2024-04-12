@@ -58,7 +58,7 @@ function Navbar() {
           sameSite: "none",
           path: "/",
           domain: "localhost",
-          expires: 12000000,
+          expires: 12000000000000,
         });
       },
     },

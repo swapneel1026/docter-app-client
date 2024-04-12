@@ -32,7 +32,7 @@ const Signin = () => {
         const response = await res.json();
         if (response?.success) {
           setCookieToLocalStorage();
-          location.replace("/dashboard");
+          // location.replace("/dashboard");
         }
       }
     } catch (error) {
