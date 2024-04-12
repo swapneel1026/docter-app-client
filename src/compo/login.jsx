@@ -31,9 +31,12 @@ const Signin = () => {
       if (res.ok) {
         const response = await res.json();
         if (response?.success) {
-          setCookieToLocalStorage();
+          const cookieRes = await setCookieToLocalStorage();
+          const data = cookieRes;
+          if (data) {
+            location.replace("/dashboard");
+          }
         }
-        location.replace("/dashboard");
       }
     } catch (error) {
       console.log(error.message);

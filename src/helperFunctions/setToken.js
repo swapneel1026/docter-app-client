@@ -25,6 +25,7 @@ export async function setCookieToLocalStorage() {
           loggedin: true,
         })
       );
+      return true;
     }
   } catch (error) {
     console.error("Error fetching user details:", error);
