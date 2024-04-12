@@ -94,6 +94,7 @@ function FindBookings() {
                 FetchBooking();
               }}
               variant="contained"
+              color="success"
             >
               Refresh
               {loading ? <CircleLoader /> : <RefreshIcon />}

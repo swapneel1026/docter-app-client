@@ -94,23 +94,27 @@ const CreateBooking = () => {
             <h1 className="mb-6 text-4xl font-bold text-teal-600">
               Create Booking
             </h1>
-            <Box className="flex flex-col w-full gap-4">
-              <label htmlFor="date" className="text-gray-700">
+            <Box className="flex flex-col w-full gap-2 mb-2">
+              <label htmlFor="date" className="font-bold text-gray-700">
                 Pick a date
               </label>
               <input
                 type="date"
                 name="date"
                 id="date"
-                className="input"
+                className="p-2 border-2 border-teal-600 rounded-md shadow-xl focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
                 required
               />
             </Box>
-            <Box className="flex flex-col w-full gap-4">
-              <label htmlFor="docteroption" className="text-gray-700">
+            <Box className="flex flex-col w-full gap-2 mb-2">
+              <label htmlFor="docteroption" className="font-bold text-gray-700">
                 Select Docter
               </label>
-              <select name="docteroption" id="docteroption" className="input">
+              <select
+                name="docteroption"
+                id="docteroption"
+                className="p-2 border-2 border-teal-600 rounded-md shadow-xl focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
+              >
                 {allDocters?.map((docter) => (
                   <option key={docter._id} value={docter?._id}>
                     Dr. {docter.name}
@@ -119,16 +123,20 @@ const CreateBooking = () => {
               </select>
             </Box>
 
-            <Box className="flex flex-col w-full gap-4">
-              <label htmlFor="bookedby" className="text-gray-700">
+            <Box className="flex flex-col w-full gap-2 mb-2">
+              <label htmlFor="bookedby" className="font-bold text-gray-700">
                 Booked By
               </label>
-              <select name="bookedby" id="bookedby" className="input">
+              <select
+                name="bookedby"
+                id="bookedby"
+                className="p-2 border-2 border-teal-600 rounded-md shadow-xl focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
+              >
                 <option value={userDetails?.id}>{userDetails?.name}</option>
               </select>
             </Box>
-            <Box className="flex flex-col w-full gap-4">
-              <label htmlFor="reason" className="text-gray-700">
+            <Box className="flex flex-col w-full gap-2 mb-2">
+              <label htmlFor="reason" className="font-bold text-gray-700">
                 Reason for booking
               </label>
               <textarea
@@ -136,22 +144,25 @@ const CreateBooking = () => {
                 id="reason"
                 rows="3"
                 required
-                className="resize-none input"
+                className="p-2 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
               ></textarea>
             </Box>
-            <Box className="flex flex-col w-full gap-4">
-              <label htmlFor="prescriptionImage" className="text-gray-700">
+            <Box className="flex flex-col w-full gap-2 mb-2">
+              <label
+                htmlFor="prescriptionImage"
+                className="font-bold text-gray-700"
+              >
                 Prescription Image
               </label>
               <input
                 type="file"
                 name="prescriptionImage"
                 id="prescriptionImage"
-                className="input"
+                className="px-2 py-1 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
               />
             </Box>
-            <Box className="flex flex-col w-full gap-4">
-              <label htmlFor="patientname" className="text-gray-700">
+            <Box className="flex flex-col w-full gap-2 mb-2">
+              <label htmlFor="patientname" className="font-bold text-gray-700">
                 Patient Name
               </label>
               <input
@@ -159,11 +170,11 @@ const CreateBooking = () => {
                 required
                 name="patientname"
                 id="patientname"
-                className="input"
+                className="p-2 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
               />
             </Box>
-            <Box className="flex flex-col w-full gap-4">
-              <label htmlFor="patientAge" className="text-gray-700">
+            <Box className="flex flex-col w-full gap-2 mb-2">
+              <label htmlFor="patientAge" className="font-bold text-gray-700">
                 Patient Age
               </label>
               <input
@@ -171,11 +182,11 @@ const CreateBooking = () => {
                 required
                 name="patientAge"
                 id="patientAge"
-                className="input"
+                className="p-2 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
               />
             </Box>
-            <Box className="flex flex-col w-full gap-4">
-              <label htmlFor="refferedby" className="text-gray-700">
+            <Box className="flex flex-col w-full gap-2 mb-2">
+              <label htmlFor="refferedby" className="font-bold text-gray-700">
                 Referred by
               </label>
               <input
@@ -183,10 +194,10 @@ const CreateBooking = () => {
                 required
                 name="refferedby"
                 id="refferedby"
-                className="input"
+                className="p-2 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
               />
             </Box>
-            <Button variant="contained" type="submit" color="primary">
+            <Button variant="contained" type="submit" color="success">
               {loader ? <CircleLoader /> : "book"}
             </Button>
           </form>

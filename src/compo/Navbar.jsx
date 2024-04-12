@@ -90,7 +90,7 @@ function Navbar() {
         sx={{
           display: {
             backgroundColor:
-              userDetails?.userType === "Docter" ? "#0D9488" : "#1976D2",
+              userDetails?.userType === "Docter" ? "#1976D2" : "#0D9488",
           },
         }}
       >
