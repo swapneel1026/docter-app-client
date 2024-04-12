@@ -70,7 +70,7 @@ function FindBookings() {
 
   useEffect(() => {
     FetchBooking();
-  }, [FetchBooking, bookingStatus]);
+  }, [bookingStatus]);
 
   return (
     <>
