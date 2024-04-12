@@ -16,8 +16,6 @@ function FindBookings() {
   const [bookingStatus, setBookingStatus] = useState("");
   const [userDetails] = useState(getPayload());
 
-  console.log(userDetails, "udg");
-
   const navigate = useNavigate();
 
   const API_URL =
@@ -60,7 +58,6 @@ function FindBookings() {
         throw new Error("Failed to update status");
       }
       console.log("Status updated successfully:", newStatus);
-      navigate(0);
     } catch (error) {
       console.error("Error updating status:", error.message);
     }
@@ -73,7 +70,7 @@ function FindBookings() {
 
   useEffect(() => {
     FetchBooking();
-  }, []);
+  }, [FetchBooking, bookingStatus]);
 
   return (
     <>
