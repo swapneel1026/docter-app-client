@@ -185,7 +185,7 @@ const CreateBooking = () => {
                 className="p-2 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
               />
             </Box>
-            <Box className="flex flex-col w-full gap-2 mb-2">
+            <Box className="flex flex-col w-full gap-2 mb-4">
               <label htmlFor="refferedby" className="font-bold text-gray-700">
                 Referred by
               </label>
@@ -197,9 +197,12 @@ const CreateBooking = () => {
                 className="p-2 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
               />
             </Box>
-            <Button variant="contained" type="submit" color="success">
-              {loader ? <CircleLoader height={"15"} width={"15"} /> : "book"}
-            </Button>
+            <button
+              type="submit"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-teal-600 border rounded-md md:text-lg"
+            >
+              {loader ? <CircleLoader height={"15"} width={"15"} /> : "BOOK"}
+            </button>
           </form>
         </div>
       )}
