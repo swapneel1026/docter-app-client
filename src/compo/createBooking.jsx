@@ -113,7 +113,7 @@ const CreateBooking = () => {
               <select
                 name="docteroption"
                 id="docteroption"
-                className="p-2 border-2 border-teal-600 rounded-md shadow-xl focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
+                className="p-2 border-2 border-teal-600 rounded-md shadow-xl focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none "
               >
                 {allDocters?.map((docter) => (
                   <option key={docter._id} value={docter?._id}>
@@ -130,7 +130,7 @@ const CreateBooking = () => {
               <select
                 name="bookedby"
                 id="bookedby"
-                className="p-2 border-2 border-teal-600 rounded-md shadow-xl focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
+                className="p-2 border-2 border-teal-600 rounded-md shadow-xl focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none "
               >
                 <option value={userDetails?.id}>{userDetails?.name}</option>
               </select>
