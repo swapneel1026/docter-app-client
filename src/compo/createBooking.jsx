@@ -102,7 +102,7 @@ const CreateBooking = () => {
                 type="date"
                 name="date"
                 id="date"
-                className="p-2 border-2 border-teal-600 rounded-md shadow-xl focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
+                className="p-2 border-2 border-teal-600 rounded-md shadow-xl focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
                 required
               />
             </Box>
@@ -113,7 +113,7 @@ const CreateBooking = () => {
               <select
                 name="docteroption"
                 id="docteroption"
-                className="p-2 border-2 border-teal-600 rounded-md shadow-xl focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
+                className="p-2 border-2 border-teal-600 rounded-md shadow-xl focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
               >
                 {allDocters?.map((docter) => (
                   <option key={docter._id} value={docter?._id}>
@@ -130,7 +130,7 @@ const CreateBooking = () => {
               <select
                 name="bookedby"
                 id="bookedby"
-                className="p-2 border-2 border-teal-600 rounded-md shadow-xl focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
+                className="p-2 border-2 border-teal-600 rounded-md shadow-xl focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
               >
                 <option value={userDetails?.id}>{userDetails?.name}</option>
               </select>
@@ -144,7 +144,7 @@ const CreateBooking = () => {
                 id="reason"
                 rows="3"
                 required
-                className="p-2 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
+                className="p-2 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
               ></textarea>
             </Box>
             <Box className="flex flex-col w-full gap-2 mb-2">
@@ -158,7 +158,7 @@ const CreateBooking = () => {
                 type="file"
                 name="prescriptionImage"
                 id="prescriptionImage"
-                className="px-2 py-1 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
+                className="px-2 py-1 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
               />
             </Box>
             <Box className="flex flex-col w-full gap-2 mb-2">
@@ -170,7 +170,7 @@ const CreateBooking = () => {
                 required
                 name="patientname"
                 id="patientname"
-                className="p-2 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
+                className="p-2 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
               />
             </Box>
             <Box className="flex flex-col w-full gap-2 mb-2">
@@ -182,7 +182,7 @@ const CreateBooking = () => {
                 required
                 name="patientAge"
                 id="patientAge"
-                className="p-2 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
+                className="p-2 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
               />
             </Box>
             <Box className="flex flex-col w-full gap-2 mb-4">
@@ -194,7 +194,7 @@ const CreateBooking = () => {
                 required
                 name="refferedby"
                 id="refferedby"
-                className="p-2 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
+                className="p-2 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:ring-teal-600 focus:ring-2 focus:transition-all focus:outline-none selection:text-red-500"
               />
             </Box>
             <button
