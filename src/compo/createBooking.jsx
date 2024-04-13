@@ -198,7 +198,7 @@ const CreateBooking = () => {
               />
             </Box>
             <Button variant="contained" type="submit" color="success">
-              {loader ? <CircleLoader /> : "book"}
+              {loader ? <CircleLoader height={"15"} width={"15"} /> : "book"}
             </Button>
           </form>
         </div>

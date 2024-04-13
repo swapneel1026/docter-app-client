@@ -103,7 +103,7 @@ const Signin = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button variant="contained" type="submit" color="inherit">
-          {loader ? <CircleLoader /> : "Signin"}
+          {loader ? <CircleLoader height={"15"} width={"15"} /> : "Signin"}
         </Button>
       </form>
     </div>

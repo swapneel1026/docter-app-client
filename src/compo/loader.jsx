@@ -1,11 +1,11 @@
 import { RotatingLines } from "react-loader-spinner";
 
-const CircleLoader = () => {
+const CircleLoader = ({ height, width }) => {
   return (
     <RotatingLines
       visible={true}
-      height="20"
-      width="20"
+      height={height}
+      width={width}
       strokeWidth="5"
       animationDuration="0.75"
       ariaLabel="rotating-lines-loading"

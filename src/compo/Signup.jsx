@@ -152,7 +152,7 @@ const Signup = () => {
             color="primary"
             fullWidth
           >
-            {loader ? <CircleLoader /> : "Signup"}
+            {loader ? <CircleLoader height={"15"} width={"15"} /> : "Signup"}
           </Button>
         </form>
       </div>

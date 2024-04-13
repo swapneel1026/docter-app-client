@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { getPayload } from "../helperFunctions/getPayload";
@@ -82,10 +76,10 @@ function FindBookings() {
       {/* USER VIEW */}
       {userDetails && userDetails?.userType === "User" && (
         <div className="overflow-x-auto">
-          <div className="flex items-center justify-between px-4">
-            <h1 className="mb-6 text-6xl font-bold">Booking Details</h1>
-            <Button
-              className="flex gap-2"
+          <div className="flex items-center justify-between px-4 mt-4 mb-6 ">
+            <h1 className="text-2xl font-bold md:text-6xl">Booking Details</h1>
+            <button
+              className="flex items-center gap-2 p-2 text-xs font-medium text-white bg-teal-600 border rounded-md md:text-lg"
               onClick={() => {
                 setLoading(true);
                 setTimeout(() => {
@@ -93,24 +87,42 @@ function FindBookings() {
                 }, 2000);
                 FetchBooking();
               }}
-              variant="contained"
-              color="success"
             >
               Refresh
-              {loading ? <CircleLoader /> : <RefreshIcon />}
-            </Button>
+              {loading ? (
+                <CircleLoader height={"15"} width={"15"} />
+              ) : (
+                <RefreshIcon fontSize="15" className="text-[15px] md:text-xl" />
+              )}
+            </button>
           </div>
           <table className="w-full table-auto">
             <thead>
               <tr className="bg-gray-200">
-                <th className="px-4 py-2 text-center">Date</th>
-                <th className="px-4 py-2 text-center">Created At</th>
-                <th className="px-4 py-2 text-center">Doctor</th>
-                <th className="px-4 py-2 text-center">Reason</th>
-                <th className="px-4 py-2 text-center">Patient Name</th>
-                <th className="px-4 py-2 text-center">Patient Age</th>
-                <th className="px-4 py-2 text-center">Referred By Doctor</th>
-                <th className="px-4 py-2 text-center">Status</th>
+                <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
+                  Date
+                </th>
+                <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
+                  Created At
+                </th>
+                <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
+                  Doctor
+                </th>
+                <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
+                  Reason
+                </th>
+                <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
+                  Patient Name
+                </th>
+                <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
+                  Patient Age
+                </th>
+                <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
+                  Referred By Doctor
+                </th>
+                <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
+                  Status
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -158,10 +170,12 @@ function FindBookings() {
       {/* DOCTER VIEW */}
       {userDetails && userDetails?.userType === "Docter" && (
         <div className="overflow-x-auto">
-          <div className="flex items-center justify-between px-4">
-            <h1 className="mb-6 text-6xl font-bold">Appointment Details</h1>
-            <Button
-              className="flex gap-2"
+          <div className="flex items-center justify-between px-4 mt-4 mb-6 ">
+            <h1 className="text-2xl font-bold md:text-6xl">
+              Appointment Details
+            </h1>
+            <button
+              className="flex items-center gap-2 p-2 text-xs font-medium text-white bg-blue-500 border rounded-md md:text-lg"
               onClick={() => {
                 setLoading(true);
                 setTimeout(() => {
@@ -169,22 +183,39 @@ function FindBookings() {
                 }, 2000);
                 FetchBooking();
               }}
-              variant="contained"
             >
               Refresh
-              {loading ? <CircleLoader /> : <RefreshIcon />}
-            </Button>
+              {loading ? (
+                <CircleLoader height={"15"} width={"15"} />
+              ) : (
+                <RefreshIcon fontSize="15" className="text-[15px] md:text-xl" />
+              )}
+            </button>
           </div>
           <table className="w-full table-auto">
             <thead>
               <tr className="bg-gray-200">
-                <th className="px-4 py-2 text-center">Date</th>
-                <th className="px-4 py-2 text-center">Created At</th>
-                <th className="px-4 py-2 text-center">Reason</th>
-                <th className="px-4 py-2 text-center">Patient Name</th>
-                <th className="px-4 py-2 text-center">Patient Age</th>
-                <th className="px-4 py-2 text-center">Referred By Doctor</th>
-                <th className="px-4 py-2 text-center">Status</th>
+                <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
+                  Date
+                </th>
+                <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
+                  Created At
+                </th>
+                <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
+                  Reason
+                </th>
+                <th className="px-4 py-2 text-sm text-center lg:text-lg lg:px-4">
+                  Patient Name
+                </th>
+                <th className="px-4 py-2 text-sm text-center lg:text-lg lg:px-4">
+                  Patient Age
+                </th>
+                <th className="px-4 py-2 text-sm text-center lg:text-lg lg:px-4">
+                  Referred By Doctor
+                </th>
+                <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
+                  Status
+                </th>
               </tr>
             </thead>
             <tbody>
