@@ -93,7 +93,10 @@ const ProfileEditDialogue = () => {
               Make changes to your profile here. Click save when you're done.
             </Dialog.Description>
             <fieldset className="mb-[15px] flex items-center md:justify-center justify-between gap-3 lg:gap-5">
-              <label className=" text-left text-[15px]" htmlFor="name">
+              <label
+                className="font-bold text-left text-gray-500"
+                htmlFor="name"
+              >
                 Name
               </label>
               <input
@@ -101,15 +104,18 @@ const ProfileEditDialogue = () => {
                   userDetails?.userType === "User"
                     ? "focus:transition-all focus:ring-teal-600 focus:ring-2 border-teal-600"
                     : " focus:transition-all focus:ring-blue-500 focus:ring-2 border-blue-500"
-                } p-2 border-2 rounded-md shadow-xl focus:transition-all  focus:outline-none `}
+                } p-2 border-2 rounded-md shadow-xl focus:transition-all  focus:outline-none w-32 md:w-full `}
                 id="name"
                 name="name"
                 defaultValue={userDetails?.name}
                 required
               />
             </fieldset>
-            <fieldset className="mb-[15px] md:justify-center justify-between flex items-center gap-3 lg:gap-5">
-              <label className="text-left text-[15px]" htmlFor="profileImage">
+            <fieldset className="mb-[15px] md:justify-between justify-between flex items-center gap-3 lg:gap-5 ">
+              <label
+                className="font-bold text-left text-gray-500"
+                htmlFor="profileImage"
+              >
                 Profile Image
               </label>
               <div className="flex flex-col items-center">
@@ -123,7 +129,10 @@ const ProfileEditDialogue = () => {
             {userDetails?.userType === "Docter" && (
               <>
                 <fieldset className="mb-[15px] flex md:justify-center justify-between items-center gap-3 lg:gap-5">
-                  <label className=" text-left text-[15px]" htmlFor="password">
+                  <label
+                    className="font-bold text-left text-gray-500"
+                    htmlFor="password"
+                  >
                     Specialization
                   </label>
                   <input
@@ -131,7 +140,7 @@ const ProfileEditDialogue = () => {
                       userDetails?.userType === "User"
                         ? "focus:transition-all focus:ring-teal-600 focus:ring-2 border-teal-600"
                         : " focus:transition-all focus:ring-blue-500 focus:ring-2 border-blue-500"
-                    } p-2 border-2 rounded-md shadow-xl focus:transition-all  focus:outline-none `}
+                    } p-2 border-2 rounded-md shadow-xl focus:transition-all  focus:outline-none w-32 md:w-full `}
                     type="text"
                     id="specialization"
                     name="specialization"
@@ -140,7 +149,10 @@ const ProfileEditDialogue = () => {
                   />
                 </fieldset>
                 <fieldset className="mb-[15px] flex md:justify-center justify-between items-center gap-3 lg:gap-5">
-                  <label className=" text-left text-[15px]" htmlFor="password">
+                  <label
+                    className="font-bold text-left text-gray-500"
+                    htmlFor="password"
+                  >
                     Experience
                   </label>
                   <input
@@ -148,7 +160,7 @@ const ProfileEditDialogue = () => {
                       userDetails?.userType === "User"
                         ? "focus:transition-all focus:ring-teal-600 focus:ring-2 border-teal-600"
                         : " focus:transition-all focus:ring-blue-500 focus:ring-2 border-blue-500"
-                    } p-2 border-2 rounded-md shadow-xl focus:transition-all  focus:outline-none `}
+                    } p-2 border-2 rounded-md shadow-xl focus:transition-all  focus:outline-none w-32 md:w-full`}
                     type="text"
                     id="experience"
                     name="experience"
@@ -157,7 +169,10 @@ const ProfileEditDialogue = () => {
                   />
                 </fieldset>
                 <fieldset className="mb-[15px] flex md:justify-center justify-between items-center gap-3 lg:gap-5">
-                  <label className=" text-left text-[15px]" htmlFor="password">
+                  <label
+                    className="font-bold text-left text-gray-500"
+                    htmlFor="password"
+                  >
                     City
                   </label>
                   <input
@@ -165,7 +180,7 @@ const ProfileEditDialogue = () => {
                       userDetails?.userType === "User"
                         ? "focus:transition-all focus:ring-teal-600 focus:ring-2 border-teal-600"
                         : " focus:transition-all focus:ring-blue-500 focus:ring-2 border-blue-500"
-                    } p-2 border-2 rounded-md shadow-xl focus:transition-all  focus:outline-none `}
+                    } p-2 border-2 rounded-md shadow-xl focus:transition-all  focus:outline-none w-32 md:w-full `}
                     type="text"
                     id="currentLivingCity"
                     name="currentLivingCity"
@@ -174,7 +189,10 @@ const ProfileEditDialogue = () => {
                   />
                 </fieldset>
                 <fieldset className="mb-[15px] flex md:justify-center justify-between items-center gap-3 lg:gap-5">
-                  <label className=" text-left text-[15px]" htmlFor="password">
+                  <label
+                    className="font-bold text-left text-gray-500"
+                    htmlFor="password"
+                  >
                     State
                   </label>
                   <input
@@ -182,7 +200,7 @@ const ProfileEditDialogue = () => {
                       userDetails?.userType === "User"
                         ? "focus:transition-all focus:ring-teal-600 focus:ring-2 border-teal-600"
                         : " focus:transition-all focus:ring-blue-500 focus:ring-2 border-blue-500"
-                    } p-2 border-2 rounded-md shadow-xl focus:transition-all  focus:outline-none `}
+                    } p-2 border-2 rounded-md shadow-xl focus:transition-all  focus:outline-none w-32 md:w-full `}
                     type="text"
                     id="currentLivingState"
                     name="currentLivingState"
@@ -196,7 +214,10 @@ const ProfileEditDialogue = () => {
               Enter password to update profile
             </small>
             <fieldset className="mt-2 mb-[15px] flex md:justify-center justify-between items-center gap-3 lg:gap-5">
-              <label className=" text-left text-[15px]" htmlFor="password">
+              <label
+                className="font-bold text-left text-gray-500"
+                htmlFor="password"
+              >
                 Password
               </label>
               <input
@@ -204,7 +225,7 @@ const ProfileEditDialogue = () => {
                   userDetails?.userType === "User"
                     ? "focus:transition-all focus:ring-teal-600 focus:ring-2 border-teal-600"
                     : " focus:transition-all focus:ring-blue-500 focus:ring-2 border-blue-500"
-                } p-2 border-2 rounded-md shadow-xl focus:transition-all  focus:outline-none `}
+                } p-2 border-2 rounded-md shadow-xl focus:transition-all  focus:outline-none w-32 md:w-full`}
                 type="password"
                 id="password"
                 name="password"

@@ -27,7 +27,7 @@ export default function FileUpload({ setFileName }) {
           userDetails?.userType === "User"
             ? "bg-teal-600 focus:ring-teal-600"
             : "bg-blue-500 focus:ring-blue-500"
-        } relative top-0 left-0 flex items-center gap-2 px-4 py-2 text-sm font-medium text-white  border rounded-md md:text-lg focus:transition-all  focus:ring-2 focus:outline-none`}
+        } relative top-0 left-0 flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white  border rounded-md md:text-lg focus:transition-all  focus:ring-2 focus:outline-none w-32 md:min-w-36 md:w-64`}
       >
         Upload file
       </button>
