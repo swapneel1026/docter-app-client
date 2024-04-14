@@ -6,6 +6,7 @@ import ProfileEditDialogue from "./ProfileEditDialogue";
 
 const Profile = () => {
   const [userDetails] = useState(getPayload());
+  const [blur, setBlur] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -13,6 +14,7 @@ const Profile = () => {
       location.replace("/signin");
     }
   }, [navigate]);
+  console.log(blur);
 
   return (
     <>
@@ -26,6 +28,7 @@ const Profile = () => {
             display: "flex",
             alignItems: "center",
           }}
+          className={`${blur ? "blur-sm" : "blur-none"}`}
         >
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={12} sm={4} md={3}>
@@ -55,7 +58,7 @@ const Profile = () => {
               </Typography>
             </Grid>
           </Grid>
-          <ProfileEditDialogue />
+          <ProfileEditDialogue blur={blur} setBlur={setBlur} />
         </Paper>
       ) : (
         userDetails && (
@@ -69,6 +72,7 @@ const Profile = () => {
                 display: "flex",
                 alignItems: "center",
               }}
+              className={`${blur ? "blur-sm" : "blur-none"}`}
             >
               <Grid container spacing={2} alignItems="center">
                 <Grid item xs={12} sm={4} md={3}>
@@ -87,7 +91,7 @@ const Profile = () => {
                   </Typography>
                 </Grid>
               </Grid>
-              <ProfileEditDialogue />
+              <ProfileEditDialogue setBlur={setBlur} />
             </Paper>
           </>
         )
