@@ -27,7 +27,7 @@ const Signup = () => {
       if (response.success) {
         setLoader(false);
         toast("Succesfully signed up!");
-        navigate("/signin");
+        // navigate("/signin");
       }
       if (response?.error?.code === 11000) {
         toast("Email already exists!");
@@ -109,8 +109,18 @@ const Signup = () => {
                 variant="outlined"
                 fullWidth
               />
-              <label htmlFor="docsImage">Upload Documents</label>
-              <input type="file" name="docsImage" id="docsImage" />
+              <div className="mt-4">
+                <label className="text-sm text-gray-500" htmlFor="profileImage">
+                  Upload Documents <span className="font-medium">(PDF)</span>
+                </label>
+                <input
+                  type="file"
+                  name="docsImage"
+                  id="docsImage"
+                  accept="image/jpeg,image/png,image/x-eps,image/jpg,.pdf"
+                  className="mt-2"
+                />
+              </div>
               <TextField
                 type="text"
                 required
@@ -141,17 +151,19 @@ const Signup = () => {
               />
             </>
           )}
-          <label className="mt-2" htmlFor="profileImage">
-            Upload Profile Image
-          </label>
-          <input type="file" name="profileImage" id="profileImage" />
-          <Button
-            // onClick={() => setLoader(true)}
-            variant="contained"
-            type="submit"
-            color="primary"
-            fullWidth
-          >
+          <div className="mt-4">
+            <label className="text-sm text-gray-500" htmlFor="profileImage">
+              Upload Profile Images*
+            </label>
+            <input
+              type="file"
+              name="profileImage"
+              id="profileImage"
+              accept="image/jpeg,image/png,image/x-eps,image/jpg"
+              className="mt-2"
+            />
+          </div>
+          <Button variant="contained" type="submit" color="primary" fullWidth>
             {loader ? <CircleLoader height={"15"} width={"15"} /> : "Signup"}
           </Button>
         </form>
