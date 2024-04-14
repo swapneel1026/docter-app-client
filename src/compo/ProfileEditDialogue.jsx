@@ -41,6 +41,8 @@ const ProfileEditDialogue = () => {
           })
         );
         navigate(0);
+      } else {
+        setLoader(false);
       }
       toast(response?.msg);
     } catch (error) {
@@ -66,8 +68,10 @@ const ProfileEditDialogue = () => {
         <button
           type="submit"
           className={`${
-            userDetails?.userType === "User" ? "bg-teal-600" : "bg-blue-500"
-          } focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none flex items-center gap-2 px-4 py-2 text-sm font-medium text-white  border rounded-md md:text-lg`}
+            userDetails?.userType === "User"
+              ? "bg-teal-600 focus:transition-all focus:ring-teal-600 focus:ring-2"
+              : "bg-blue-500 focus:transition-all focus:ring-blue-500 focus:ring-2"
+          }  focus:outline-none flex items-center gap-2 px-4 py-2 text-sm font-medium text-white  border rounded-md md:text-lg`}
         >
           EDIT
         </button>
@@ -75,11 +79,17 @@ const ProfileEditDialogue = () => {
       <Dialog.Portal>
         <form encType="multipart/form" onSubmit={(e) => handleUpdateProfile(e)}>
           <Dialog.Overlay className="bg-blackA6 data-[state=open]:animate-overlayShow fixed inset-0" />
-          <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none">
-            <Dialog.Title className="text-mauve12 m-0 text-[17px] font-medium">
+          <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none overflow-y-auto">
+            <Dialog.Title
+              className={`${
+                userDetails?.userType === "User"
+                  ? "text-teal-600"
+                  : "text-blue-500"
+              } text-lg font-bold`}
+            >
               Edit profile
             </Dialog.Title>
-            <Dialog.Description className="text-mauve11 mt-[10px] mb-5 text-[15px] leading-normal">
+            <Dialog.Description className="mt-4 mb-4 text-sm font-bold text-gray-900">
               Make changes to your profile here. Click save when you're done.
             </Dialog.Description>
             <fieldset className="mb-[15px] flex items-center md:justify-center justify-between gap-3 lg:gap-5">
@@ -87,7 +97,11 @@ const ProfileEditDialogue = () => {
                 Name
               </label>
               <input
-                className="p-2 border-2 border-teal-600 rounded-md shadow-xl focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none "
+                className={`${
+                  userDetails?.userType === "User"
+                    ? "focus:transition-all focus:ring-teal-600 focus:ring-2 border-teal-600"
+                    : " focus:transition-all focus:ring-blue-500 focus:ring-2 border-blue-500"
+                } p-2 border-2 rounded-md shadow-xl focus:transition-all  focus:outline-none `}
                 id="name"
                 name="name"
                 defaultValue={userDetails?.name}
@@ -105,16 +119,95 @@ const ProfileEditDialogue = () => {
                 </h4>
               </div>
             </fieldset>
-            <fieldset className="mb-[15px] flex md:justify-center justify-between items-center gap-3 lg:gap-5">
+
+            {userDetails?.userType === "Docter" && (
+              <>
+                <fieldset className="mb-[15px] flex md:justify-center justify-between items-center gap-3 lg:gap-5">
+                  <label className=" text-left text-[15px]" htmlFor="password">
+                    Specialization
+                  </label>
+                  <input
+                    className={`${
+                      userDetails?.userType === "User"
+                        ? "focus:transition-all focus:ring-teal-600 focus:ring-2 border-teal-600"
+                        : " focus:transition-all focus:ring-blue-500 focus:ring-2 border-blue-500"
+                    } p-2 border-2 rounded-md shadow-xl focus:transition-all  focus:outline-none `}
+                    type="text"
+                    id="specialization"
+                    name="specialization"
+                    defaultValue={userDetails?.specialization}
+                    required
+                  />
+                </fieldset>
+                <fieldset className="mb-[15px] flex md:justify-center justify-between items-center gap-3 lg:gap-5">
+                  <label className=" text-left text-[15px]" htmlFor="password">
+                    Experience
+                  </label>
+                  <input
+                    className={`${
+                      userDetails?.userType === "User"
+                        ? "focus:transition-all focus:ring-teal-600 focus:ring-2 border-teal-600"
+                        : " focus:transition-all focus:ring-blue-500 focus:ring-2 border-blue-500"
+                    } p-2 border-2 rounded-md shadow-xl focus:transition-all  focus:outline-none `}
+                    type="text"
+                    id="experience"
+                    name="experience"
+                    defaultValue={userDetails?.experience}
+                    required
+                  />
+                </fieldset>
+                <fieldset className="mb-[15px] flex md:justify-center justify-between items-center gap-3 lg:gap-5">
+                  <label className=" text-left text-[15px]" htmlFor="password">
+                    City
+                  </label>
+                  <input
+                    className={`${
+                      userDetails?.userType === "User"
+                        ? "focus:transition-all focus:ring-teal-600 focus:ring-2 border-teal-600"
+                        : " focus:transition-all focus:ring-blue-500 focus:ring-2 border-blue-500"
+                    } p-2 border-2 rounded-md shadow-xl focus:transition-all  focus:outline-none `}
+                    type="text"
+                    id="currentLivingCity"
+                    name="currentLivingCity"
+                    defaultValue={userDetails?.currentLivingCity}
+                    required
+                  />
+                </fieldset>
+                <fieldset className="mb-[15px] flex md:justify-center justify-between items-center gap-3 lg:gap-5">
+                  <label className=" text-left text-[15px]" htmlFor="password">
+                    State
+                  </label>
+                  <input
+                    className={`${
+                      userDetails?.userType === "User"
+                        ? "focus:transition-all focus:ring-teal-600 focus:ring-2 border-teal-600"
+                        : " focus:transition-all focus:ring-blue-500 focus:ring-2 border-blue-500"
+                    } p-2 border-2 rounded-md shadow-xl focus:transition-all  focus:outline-none `}
+                    type="text"
+                    id="currentLivingState"
+                    name="currentLivingState"
+                    defaultValue={userDetails?.currentLivingState}
+                    required
+                  />
+                </fieldset>
+              </>
+            )}
+            <small className="text-sm font-bold text-gray-900">
+              Enter password to update profile
+            </small>
+            <fieldset className="mt-2 mb-[15px] flex md:justify-center justify-between items-center gap-3 lg:gap-5">
               <label className=" text-left text-[15px]" htmlFor="password">
                 Password
               </label>
               <input
-                className="py-2 border-2 border-teal-600 rounded-md shadow-xl lg:px-2 focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none "
+                className={`${
+                  userDetails?.userType === "User"
+                    ? "focus:transition-all focus:ring-teal-600 focus:ring-2 border-teal-600"
+                    : " focus:transition-all focus:ring-blue-500 focus:ring-2 border-blue-500"
+                } p-2 border-2 rounded-md shadow-xl focus:transition-all  focus:outline-none `}
                 type="password"
                 id="password"
                 name="password"
-                required
               />
             </fieldset>
 
@@ -123,9 +216,9 @@ const ProfileEditDialogue = () => {
                 type="submit"
                 className={`${
                   userDetails?.userType === "User"
-                    ? "bg-teal-600"
-                    : "bg-blue-500"
-                } flex items-center gap-2 px-4 py-2 text-sm font-medium text-white  border rounded-md md:text-lg focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none`}
+                    ? "bg-teal-600 focus:ring-teal-600"
+                    : "bg-blue-500 focus:ring-blue-500"
+                } flex items-center gap-2 px-4 py-2 text-sm font-medium text-white  border rounded-md md:text-lg focus:transition-all  focus:ring-2 focus:outline-none`}
               >
                 {loader ? (
                   <CircleLoader height={"15"} width={"15"} />
