@@ -26,7 +26,7 @@ const ProfileEditDialogue = () => {
         {
           mode: "cors",
           body: data,
-          method: "POST",
+          method: "PATCH",
         }
       );
 
