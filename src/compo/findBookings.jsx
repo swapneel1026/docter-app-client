@@ -127,27 +127,27 @@ function FindBookings() {
             </thead>
             <tbody>
               {bookings?.data?.map((booking) => (
-                <tr key={booking._id} className="border-b border-gray-200">
+                <tr key={booking?._id} className="border-b border-gray-200">
                   <td className="px-4 py-2 text-center">
-                    {new Date(booking.dateOfBooking).toLocaleDateString()}
+                    {new Date(booking?.dateOfBooking).toLocaleDateString()}
                   </td>
                   <td className="px-4 py-2 text-center">
-                    {new Date(booking.createdAt).toLocaleTimeString()}
+                    {new Date(booking?.createdAt).toLocaleTimeString()}
                   </td>
                   <td className="px-4 py-2 text-center">
-                    {booking.docter.name}
+                    {booking?.docter?.name}
                   </td>
                   <td className="px-4 py-2 text-center">
-                    {booking.reasonOfBooking}
+                    {booking?.reasonOfBooking}
                   </td>
                   <td className="px-4 py-2 text-center">
-                    {booking.patientName}
+                    {booking?.patientName}
                   </td>
                   <td className="px-4 py-2 text-center">
-                    {booking.patientAge}
+                    {booking?.patientAge}
                   </td>
                   <td className="px-4 py-2 text-center">
-                    {booking.refferedByDocter}
+                    {booking?.refferedByDocter}
                   </td>
                   <td
                     className={`${
@@ -220,24 +220,24 @@ function FindBookings() {
             </thead>
             <tbody>
               {bookings?.data?.map((booking) => (
-                <tr key={booking._id} className="border-b border-gray-200">
+                <tr key={booking?._id} className="border-b border-gray-200">
                   <td className="px-4 py-2 text-center">
-                    {new Date(booking.dateOfBooking).toLocaleDateString()}
+                    {new Date(booking?.dateOfBooking).toLocaleDateString()}
                   </td>
                   <td className="px-4 py-2 text-center">
-                    {new Date(booking.createdAt).toLocaleTimeString()}
+                    {new Date(booking?.createdAt).toLocaleTimeString()}
                   </td>
                   <td className="px-4 py-2 text-center">
-                    {booking.reasonOfBooking}
+                    {booking?.reasonOfBooking}
                   </td>
                   <td className="px-4 py-2 text-center">
-                    {booking.patientName}
+                    {booking?.patientName}
                   </td>
                   <td className="px-4 py-2 text-center">
-                    {booking.patientAge}
+                    {booking?.patientAge}
                   </td>
                   <td className="px-4 py-2 text-center">
-                    {booking.refferedByDocter}
+                    {booking?.refferedByDocter}
                   </td>
                   <td className="px-4 py-2 text-center">
                     <FormControl fullWidth>
