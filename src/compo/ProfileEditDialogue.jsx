@@ -83,7 +83,7 @@ const ProfileEditDialogue = ({ setBlur }) => {
           <Dialog.Content
             onPointerDownOutside={() => setBlur(false)}
             onEscapeKeyDown={() => setBlur(false)}
-            className="fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-2xl focus:outline-none overflow-y-auto scrollbar-hide"
+            className="fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-2xl focus:outline-none overflow-y-auto overflow-x-hidden scrollbar-hide"
           >
             <Dialog.Title
               className={`${
