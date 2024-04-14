@@ -9,9 +9,14 @@ import CreateBooking from "./compo/createBooking.jsx";
 import Navbar from "./compo/Navbar.jsx";
 import Profile from "./compo/Profile.jsx";
 import { Toaster } from "sonner";
+import LandingPage from "./compo/LandingPage.jsx";
 
 const router = createBrowserRouter(
   [
+    {
+      path: "/",
+      element: <LandingPage />,
+    },
     {
       path: "/signin",
       element: <Signin />,

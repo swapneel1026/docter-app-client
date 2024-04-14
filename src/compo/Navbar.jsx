@@ -19,6 +19,12 @@ function Navbar() {
   const [userDetails] = useState(getPayload());
   const pages = [
     {
+      page: "Home",
+      Pagepath: "/",
+      signinView: true,
+      createBookingView: true,
+    },
+    {
       page: "Create Booking",
       Pagepath: "/createbooking",
       signinView: true,
