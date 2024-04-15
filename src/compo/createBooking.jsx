@@ -21,13 +21,8 @@ const CreateBooking = () => {
       const response = await fetch(`${API_URL}/api/booking/bookappointment`, {
         mode: "cors",
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...data,
-          previousPrescriptionImage: data.previousPrescriptionImage.name,
-        }),
+
+        body: data,
       });
 
       const responseData = await response.json();
@@ -67,18 +62,7 @@ const CreateBooking = () => {
   const handleBooking = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const data = {
-      dateOfBooking: formData.get("date"),
-      docter: formData.get("docteroption"),
-      bookedBy: formData.get("bookedby"),
-      reasonOfBooking: formData.get("reason"),
-      previousPrescriptionImage: formData.get("prescriptionImage"),
-      patientName: formData.get("patientname"),
-      patientAge: formData.get("patientAge"),
-      refferedByDocter: formData.get("refferedby"),
-    };
-
-    PostBooking(data);
+    PostBooking(formData);
     setLoader(true);
   };
 
@@ -88,6 +72,7 @@ const CreateBooking = () => {
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-600">
           <form
             id="formElem"
+            encType="multipart/form"
             onSubmit={(e) => handleBooking(e)}
             className="flex flex-col items-center justify-center w-full px-4 py-8 bg-white rounded-md shadow-xl sm:max-w-md"
           >
@@ -95,24 +80,27 @@ const CreateBooking = () => {
               Create Booking
             </h1>
             <Box className="flex flex-col w-full gap-2 mb-2">
-              <label htmlFor="date" className="font-bold text-gray-700">
+              <label
+                htmlFor="dateOfBooking"
+                className="font-bold text-gray-700"
+              >
                 Pick a date
               </label>
               <input
                 type="date"
-                name="date"
-                id="date"
+                name="dateOfBooking"
+                id="dateOfBooking"
                 className="p-2 border-2 border-teal-600 rounded-md shadow-xl focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
                 required
               />
             </Box>
             <Box className="flex flex-col w-full gap-2 mb-2">
-              <label htmlFor="docteroption" className="font-bold text-gray-700">
+              <label htmlFor="docter" className="font-bold text-gray-700">
                 Select Docter
               </label>
               <select
-                name="docteroption"
-                id="docteroption"
+                name="docter"
+                id="docter"
                 className="p-2 border-2 border-teal-600 rounded-md shadow-xl focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none "
               >
                 {allDocters?.map((docter) => (
@@ -124,24 +112,27 @@ const CreateBooking = () => {
             </Box>
 
             <Box className="flex flex-col w-full gap-2 mb-2">
-              <label htmlFor="bookedby" className="font-bold text-gray-700">
+              <label htmlFor="bookedBy" className="font-bold text-gray-700">
                 Booked By
               </label>
               <select
-                name="bookedby"
-                id="bookedby"
+                name="bookedBy"
+                id="bookedBy"
                 className="p-2 border-2 border-teal-600 rounded-md shadow-xl focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none "
               >
                 <option value={userDetails?.id}>{userDetails?.name}</option>
               </select>
             </Box>
             <Box className="flex flex-col w-full gap-2 mb-2">
-              <label htmlFor="reason" className="font-bold text-gray-700">
+              <label
+                htmlFor="reasonOfBooking"
+                className="font-bold text-gray-700"
+              >
                 Reason for booking
               </label>
               <textarea
-                name="reason"
-                id="reason"
+                name="reasonOfBooking"
+                id="reasonOfBooking"
                 rows="3"
                 required
                 className="p-2 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
@@ -156,20 +147,20 @@ const CreateBooking = () => {
               </label>
               <input
                 type="file"
-                name="prescriptionImage"
-                id="prescriptionImage"
+                name="previousPrescriptionImage"
+                id="previousPrescriptionImage"
                 className="px-2 py-1 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
               />
             </Box>
             <Box className="flex flex-col w-full gap-2 mb-2">
-              <label htmlFor="patientname" className="font-bold text-gray-700">
+              <label htmlFor="patientName" className="font-bold text-gray-700">
                 Patient Name
               </label>
               <input
                 type="text"
                 required
-                name="patientname"
-                id="patientname"
+                name="patientName"
+                id="patientName"
                 className="p-2 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:transition-all focus:ring-teal-600 focus:ring-2 focus:outline-none selection:text-red-500"
               />
             </Box>
@@ -186,14 +177,17 @@ const CreateBooking = () => {
               />
             </Box>
             <Box className="flex flex-col w-full gap-2 mb-4">
-              <label htmlFor="refferedby" className="font-bold text-gray-700">
+              <label
+                htmlFor="refferedByDocter"
+                className="font-bold text-gray-700"
+              >
                 Referred by
               </label>
               <input
                 type="text"
                 required
-                name="refferedby"
-                id="refferedby"
+                name="refferedByDocter"
+                id="refferedByDocter"
                 className="p-2 border-2 border-teal-600 rounded-md shadow-xl resize-none focus:ring-teal-600 focus:ring-2 focus:transition-all focus:outline-none selection:text-red-500"
               />
             </Box>

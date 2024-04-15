@@ -1,7 +1,6 @@
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
 import FindBookings from "./compo/findBookings.jsx";
 import Signup from "./compo/Signup.jsx";
 import Signin from "./compo/login.jsx";
@@ -10,7 +9,6 @@ import Navbar from "./compo/Navbar.jsx";
 import Profile from "./compo/Profile.jsx";
 import { Toaster } from "sonner";
 import LandingPage from "./compo/LandingPage.jsx";
-
 const router = createBrowserRouter(
   [
     {

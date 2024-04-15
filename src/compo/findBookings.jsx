@@ -5,6 +5,7 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import { getPayload } from "../helperFunctions/getPayload";
 import { toast } from "sonner";
 import CircleLoader from "./loader";
+import BookingFullDetailsDialogue from "./BookingFullDetailsDialogue";
 
 function FindBookings() {
   const [bookings, setBookings] = useState(null);
@@ -199,22 +200,16 @@ function FindBookings() {
                   Date
                 </th>
                 <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
-                  Created At
-                </th>
-                <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
                   Reason
                 </th>
                 <th className="px-4 py-2 text-sm text-center lg:text-lg lg:px-4">
                   Patient Name
                 </th>
-                <th className="px-4 py-2 text-sm text-center lg:text-lg lg:px-4">
-                  Patient Age
-                </th>
-                <th className="px-4 py-2 text-sm text-center lg:text-lg lg:px-4">
-                  Referred By Doctor
-                </th>
                 <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
                   Status
+                </th>
+                <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
+                  Action
                 </th>
               </tr>
             </thead>
@@ -224,29 +219,17 @@ function FindBookings() {
                   <td className="px-4 py-2 text-center">
                     {new Date(booking?.dateOfBooking).toLocaleDateString()}
                   </td>
-                  <td className="px-4 py-2 text-center">
-                    {new Date(booking?.createdAt).toLocaleTimeString()}
-                  </td>
-                  <td className="px-4 py-2 text-center">
+                  <td className="px-4 py-2 text-center capitalize">
                     {booking?.reasonOfBooking}
                   </td>
-                  <td className="px-4 py-2 text-center">
+                  <td className="px-4 py-2 text-center capitalize">
                     {booking?.patientName}
                   </td>
                   <td className="px-4 py-2 text-center">
-                    {booking?.patientAge}
-                  </td>
-                  <td className="px-4 py-2 text-center">
-                    {booking?.refferedByDocter}
-                  </td>
-                  <td className="px-4 py-2 text-center">
-                    <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">
-                        Status
-                      </InputLabel>
+                    <FormControl fullWidth variant="standard">
                       <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
+                        labelId="demo-simple-select-filled-label"
+                        id="demo-simple-select-filled"
                         value={booking?.bookingStatus}
                         label="Age"
                         onChange={(e) => handleStatusChange(booking?._id, e)}
@@ -256,6 +239,9 @@ function FindBookings() {
                         <MenuItem value={"Rejected"}>Rejected</MenuItem>
                       </Select>
                     </FormControl>
+                  </td>
+                  <td className="px-4 py-2 text-center">
+                    <BookingFullDetailsDialogue bookingDetails={booking} />
                   </td>
                 </tr>
               ))}
