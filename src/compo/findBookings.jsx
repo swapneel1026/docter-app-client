@@ -104,9 +104,6 @@ function FindBookings() {
                   Date
                 </th>
                 <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
-                  Created At
-                </th>
-                <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
                   Doctor
                 </th>
                 <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
@@ -116,13 +113,10 @@ function FindBookings() {
                   Patient Name
                 </th>
                 <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
-                  Patient Age
-                </th>
-                <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
-                  Referred By Doctor
-                </th>
-                <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
                   Status
+                </th>
+                <th className="px-0 py-2 text-sm text-center lg:text-lg lg:px-4">
+                  Action
                 </th>
               </tr>
             </thead>
@@ -132,23 +126,15 @@ function FindBookings() {
                   <td className="px-4 py-2 text-center">
                     {new Date(booking?.dateOfBooking).toLocaleDateString()}
                   </td>
-                  <td className="px-4 py-2 text-center">
-                    {new Date(booking?.createdAt).toLocaleTimeString()}
-                  </td>
-                  <td className="px-4 py-2 text-center">
+
+                  <td className="px-4 py-2 text-center capitalize">
                     {booking?.docter?.name}
                   </td>
-                  <td className="px-4 py-2 text-center">
+                  <td className="px-4 py-2 text-center capitalize">
                     {booking?.reasonOfBooking}
                   </td>
-                  <td className="px-4 py-2 text-center">
+                  <td className="px-4 py-2 text-center capitalize">
                     {booking?.patientName}
-                  </td>
-                  <td className="px-4 py-2 text-center">
-                    {booking?.patientAge}
-                  </td>
-                  <td className="px-4 py-2 text-center">
-                    {booking?.refferedByDocter}
                   </td>
                   <td
                     className={`${
@@ -160,6 +146,19 @@ function FindBookings() {
                     } px-4 py-2 text-center`}
                   >
                     {booking.bookingStatus}
+                  </td>
+                  <td className="flex justify-center gap-2 px-4 py-2">
+                    <BookingFullDetailsDialogue
+                      bookingDetails={booking}
+                      userDetails={userDetails}
+                    />
+                    <button
+                      onClick={() => {
+                        alert(booking?._id);
+                      }}
+                    >
+                      🗑️
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -241,7 +240,10 @@ function FindBookings() {
                     </FormControl>
                   </td>
                   <td className="px-4 py-2 text-center">
-                    <BookingFullDetailsDialogue bookingDetails={booking} />
+                    <BookingFullDetailsDialogue
+                      bookingDetails={booking}
+                      userDetails={userDetails}
+                    />
                   </td>
                 </tr>
               ))}

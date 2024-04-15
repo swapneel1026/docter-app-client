@@ -3,7 +3,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import PdfViewer from "./PdfRenderer";
 
-const BookingFullDetailsDialogue = ({ bookingDetails }) => (
+const BookingFullDetailsDialogue = ({ bookingDetails, userDetails }) => (
   <Dialog.Root>
     <Dialog.Trigger asChild>
       <button className="p-2 text-xs text-white bg-blue-500 rounded-md text-nowrap">
@@ -57,10 +57,12 @@ const BookingFullDetailsDialogue = ({ bookingDetails }) => (
             <label htmlFor="name">Current Status</label>
             <label>{bookingDetails?.bookingStatus}</label>
           </div>
-          <div className="flex justify-between px-4 text-xs md:px-8 md:text-base">
-            <label htmlFor="name">Booked by</label>
-            <label>{bookingDetails?.bookedBy?.name}</label>
-          </div>
+          {userDetails?.userType === "Docter" && (
+            <div className="flex justify-between px-4 text-xs md:px-8 md:text-base">
+              <label htmlFor="name">Booked by</label>
+              <label>{bookingDetails?.bookedBy?.name}</label>
+            </div>
+          )}
           {bookingDetails?.previousPrescriptionImage && (
             <div className="flex flex-col justify-between gap-4 px-4 text-xs md:px-8 md:text-base">
               <label htmlFor="name">Previous Prescription</label>
