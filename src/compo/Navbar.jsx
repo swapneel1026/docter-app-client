@@ -90,7 +90,15 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar
+      position="static"
+      sx={{
+        display: {
+          backgroundColor:
+            userDetails?.userType === "Docter" ? "#1976D2" : "#0D9488",
+        },
+      }}
+    >
       <Container
         maxWidth="xl"
         sx={{
