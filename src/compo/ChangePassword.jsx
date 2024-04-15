@@ -4,6 +4,7 @@ import { Cross2Icon } from "@radix-ui/react-icons";
 import { getPayload } from "../helperFunctions/getPayload";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import CircleLoader from "./loader";
 
 const ChangePassword = ({ blur, setBlur }) => {
   const [userDetails] = useState(getPayload());
@@ -17,6 +18,7 @@ const ChangePassword = ({ blur, setBlur }) => {
 
   const updatePassword = async (data) => {
     try {
+      setLoader(true);
       const res = await fetch(
         `${API_URL}/api/${userDetails?.userType.toLowerCase()}/updatepassword`,
         {
@@ -39,12 +41,15 @@ const ChangePassword = ({ blur, setBlur }) => {
       if (passwordChangedResponse?.success) {
         toast(passwordChangedResponse?.msg);
         navigate(0);
+        setLoader(false);
       } else {
         toast(passwordChangedResponse?.msg);
+        setLoader(false);
       }
     } catch (error) {
       console.log(error);
       toast(error);
+      setLoader(false);
     }
   };
   const handleUpdate = (e) => {
