@@ -167,7 +167,7 @@ function FindBookings() {
                   >
                     {booking.bookingStatus}
                   </td>
-                  <td className="flex justify-center gap-2 px-4 py-2">
+                  <td className="flex justify-center gap-3 px-4 py-2">
                     <BookingFullDetailsDialogue
                       bookingDetails={booking}
                       userDetails={userDetails}
