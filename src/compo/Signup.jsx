@@ -27,7 +27,7 @@ const Signup = () => {
       if (response.success) {
         setLoader(false);
         toast("Succesfully signed up!");
-        // navigate("/signin");
+        navigate("/signin");
       }
       if (response?.error?.code === 11000) {
         toast("Email already exists!");
