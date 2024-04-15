@@ -20,6 +20,7 @@ function FindBookings() {
     import.meta.env.VITE_ENV === "production"
       ? import.meta.env.VITE_PROD_BASE_URL
       : import.meta.env.VITE_DEV_BASE_URL;
+
   const FetchBooking = async () => {
     const res = await fetch(
       `${API_URL}/api/booking/${
@@ -60,6 +61,25 @@ function FindBookings() {
       FetchBooking();
     } catch (error) {
       toast("Error updating status:", error.message);
+    }
+  };
+  const handleBookingDelete = async (bookingId) => {
+    try {
+      const res = await fetch(`${API_URL}/api/booking/deletebooking`, {
+        mode: "cors",
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ bookingId: bookingId }),
+      });
+      const deletedResponse = await res.json();
+      if (deletedResponse?.success) {
+        toast(deletedResponse?.msg);
+        navigate(0);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
   useEffect(() => {
@@ -154,7 +174,7 @@ function FindBookings() {
                     />
                     <button
                       onClick={() => {
-                        alert(booking?._id);
+                        handleBookingDelete(booking?._id);
                       }}
                     >
                       🗑️
