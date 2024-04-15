@@ -74,7 +74,7 @@ const ProfileEditDialogue = ({ setBlur }) => {
               : "bg-blue-500 focus:transition-all focus:ring-blue-500 focus:ring-2"
           }  focus:outline-none flex items-center gap-2 px-4 py-2 text-sm font-medium text-white  border rounded-md md:text-lg`}
         >
-          EDIT
+          Edit
         </button>
       </Dialog.Trigger>
       <Dialog.Portal>
