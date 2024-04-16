@@ -6,6 +6,7 @@ import { getPayload } from "../helperFunctions/getPayload";
 import { toast } from "sonner";
 import CircleLoader from "./loader";
 import BookingFullDetailsDialogue from "./BookingFullDetailsDialogue";
+import DeleteBookingButton from "./DeleteBookingButton";
 
 function FindBookings() {
   const [bookings, setBookings] = useState(null);
@@ -172,13 +173,17 @@ function FindBookings() {
                       bookingDetails={booking}
                       userDetails={userDetails}
                     />
-                    <button
+                    {/* <button
                       onClick={() => {
                         handleBookingDelete(booking?._id);
                       }}
                     >
                       🗑️
-                    </button>
+                    </button> */}
+                    <DeleteBookingButton
+                      handleBookingDelete={handleBookingDelete}
+                      bookingId={booking?._id}
+                    />
                   </td>
                 </tr>
               ))}
