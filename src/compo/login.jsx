@@ -6,12 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { setCookieToLocalStorage } from "../helperFunctions/setToken";
 import { toast } from "sonner";
 import CircleLoader from "./loader";
+import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [typeofUser, settypeofUser] = useState("");
   const [loader, setLoader] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -69,7 +71,7 @@ const Signin = () => {
     <div className="flex flex-col items-center justify-center h-screen bg-gray-600 border border-black">
       <form
         onSubmit={(e) => handleUserSignin(e)}
-        className="flex flex-col items-center justify-center px-10 py-4 bg-white rounded-md shadow-xl gap-y-4"
+        className="flex flex-col items-stretch justify-center px-10 py-4 bg-white rounded-md shadow-xl gap-y-4"
       >
         <h1 className="mb-10 text-6xl font-bold text-teal-600">Singin</h1>
         <FormControl fullWidth>
@@ -94,14 +96,19 @@ const Signin = () => {
           variant="standard"
           onChange={(e) => setEmail(e.target.value)}
         />
-        <TextField
-          type="password"
-          required
-          name="password"
-          label="Password"
-          variant="standard"
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="flex items-center justify-center">
+          <TextField
+            type={showPassword ? "text" : "password"}
+            required
+            name="password"
+            label="Password"
+            variant="standard"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <span onClick={() => setShowPassword(!showPassword)}>
+            {showPassword ? <EyeOpenIcon /> : <EyeClosedIcon />}
+          </span>
+        </div>
         <Button variant="contained" type="submit" color="inherit">
           {loader ? <CircleLoader height={"15"} width={"15"} /> : "Signin"}
         </Button>
