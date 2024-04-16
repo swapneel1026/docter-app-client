@@ -173,13 +173,6 @@ function FindBookings() {
                       bookingDetails={booking}
                       userDetails={userDetails}
                     />
-                    {/* <button
-                      onClick={() => {
-                        handleBookingDelete(booking?._id);
-                      }}
-                    >
-                      🗑️
-                    </button> */}
                     <DeleteBookingButton
                       handleBookingDelete={handleBookingDelete}
                       bookingId={booking?._id}
