@@ -27,7 +27,7 @@ function Navbar() {
     {
       page: "Create Booking",
       Pagepath: "/createbooking",
-      signinView: userDetails ? true : false,
+      signinView: userDetails?.userType === "User" ? true : false,
       createBookingView: true,
     },
     {

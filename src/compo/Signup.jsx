@@ -51,14 +51,15 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-600 border border-black">
-      <div className="flex flex-col items-center justify-center w-full max-w-md px-4 py-8 bg-white rounded-lg shadow-lg">
+    <div className="flex flex-col items-center justify-center min-h-screen from-gray-400 to-gray-900 bg-gradient-to-t">
+      <div className="flex flex-col items-center justify-center w-full max-w-md px-4 py-8 rounded-lg shadow-lg bg-slate-200">
         <h1 className="mb-8 text-4xl font-bold text-teal-600">
           SignUp {formType === "user" ? "(User)" : "(Docter)"}
         </h1>
         <div className="flex justify-center mb-4 space-x-4">
           <Button
             variant="contained"
+            color="inherit"
             onClick={() => setFormType("user")}
             className={formType === "user" ? "bg-teal-600" : ""}
           >
@@ -66,6 +67,7 @@ const Signup = () => {
           </Button>
           <Button
             variant="contained"
+            color="inherit"
             onClick={() => setFormType("docter")}
             className={formType === "docter" ? "bg-teal-600" : ""}
           >
@@ -171,7 +173,7 @@ const Signup = () => {
               className="mt-2"
             />
           </div>
-          <Button variant="contained" type="submit" color="primary" fullWidth>
+          <Button variant="contained" type="submit" color="inherit" fullWidth>
             {loader ? <CircleLoader height={"15"} width={"15"} /> : "Signup"}
           </Button>
         </form>

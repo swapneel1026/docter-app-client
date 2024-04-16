@@ -68,12 +68,17 @@ const Signin = () => {
   }, [navigate]);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-600 border border-black">
+    <div
+      className={`flex flex-col items-center justify-center h-screen  from-gray-900 to-gray-400 bg-gradient-to-b
+    `}
+    >
       <form
         onSubmit={(e) => handleUserSignin(e)}
-        className="flex flex-col items-stretch justify-center px-10 py-4 bg-white rounded-md shadow-xl gap-y-4"
+        className="flex flex-col items-stretch justify-center px-10 py-4 rounded-md shadow-xl bg-slate-200 gap-y-4"
       >
-        <h1 className="mb-10 text-6xl font-bold text-teal-600">Singin</h1>
+        <h1 className="mb-10 text-6xl font-bold text-center text-teal-600">
+          Singin
+        </h1>
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Signin As</InputLabel>
           <Select
