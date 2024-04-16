@@ -27,13 +27,13 @@ function Navbar() {
     {
       page: "Create Booking",
       Pagepath: "/createbooking",
-      signinView: true,
-      createBookingView: userDetails?.userType === "Docter" ? false : true,
+      signinView: userDetails ? true : false,
+      createBookingView: true,
     },
     {
       page: "My Bookings",
       Pagepath: "/dashboard",
-      signinView: true,
+      signinView: userDetails ? true : false,
       createBookingView: true,
     },
     {
@@ -46,7 +46,7 @@ function Navbar() {
       page: "Sign-up",
       Pagepath: "/signup",
       signinView: true,
-      createBookingView: true,
+      createBookingView: userDetails ? false : true,
     },
   ];
   const settings = [
@@ -100,7 +100,7 @@ function Navbar() {
       }}
     >
       <Container
-        maxWidth="xl"
+        maxWidth="2xl"
         sx={{
           display: {
             backgroundColor:
@@ -122,7 +122,12 @@ function Navbar() {
             <MenuIcon />
           </IconButton>
 
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <AdbIcon
+            sx={{
+              display: { xs: "none", md: "flex" },
+              mr: 1,
+            }}
+          />
           <Typography
             variant="h6"
             noWrap
@@ -143,7 +148,12 @@ function Navbar() {
 
           <Box sx={{ flexGrow: 1 }} />
 
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+            }}
+          >
             {pages.map(
               (page) =>
                 page.signinView &&
