@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { Cross2Icon } from "@radix-ui/react-icons";
+import { Cross2Icon, EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 import { Button } from "@mui/material";
 import { getPayload } from "../helperFunctions/getPayload";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ const ProfileEditDialogue = ({ setBlur }) => {
   const [userDetails] = useState(getPayload());
   const [loader, setLoader] = useState(false);
   const [filename, setFileName] = useState("No file Selected");
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
   const API_URL =
@@ -136,7 +137,7 @@ const ProfileEditDialogue = ({ setBlur }) => {
                 <fieldset className="mb-[15px] flex md:justify-center justify-between items-center gap-3 lg:gap-5">
                   <label
                     className="font-bold text-left text-gray-500"
-                    htmlFor="password"
+                    htmlFor="specialization"
                   >
                     Specialization
                   </label>
@@ -156,7 +157,7 @@ const ProfileEditDialogue = ({ setBlur }) => {
                 <fieldset className="mb-[15px] flex md:justify-center justify-between items-center gap-3 lg:gap-5">
                   <label
                     className="font-bold text-left text-gray-500"
-                    htmlFor="password"
+                    htmlFor="experience"
                   >
                     Experience
                   </label>
@@ -176,7 +177,7 @@ const ProfileEditDialogue = ({ setBlur }) => {
                 <fieldset className="mb-[15px] flex md:justify-center justify-between items-center gap-3 lg:gap-5">
                   <label
                     className="font-bold text-left text-gray-500"
-                    htmlFor="password"
+                    htmlFor="currentLivingCity"
                   >
                     City
                   </label>
@@ -196,7 +197,7 @@ const ProfileEditDialogue = ({ setBlur }) => {
                 <fieldset className="mb-[15px] flex md:justify-center justify-between items-center gap-3 lg:gap-5">
                   <label
                     className="font-bold text-left text-gray-500"
-                    htmlFor="password"
+                    htmlFor="currentLivingState"
                   >
                     State
                   </label>
@@ -231,10 +232,13 @@ const ProfileEditDialogue = ({ setBlur }) => {
                     ? "focus:transition-all focus:ring-teal-600 focus:ring-2 border-teal-600"
                     : " focus:transition-all focus:ring-blue-500 focus:ring-2 border-blue-500"
                 } p-2 border-2 rounded-md shadow-xl focus:transition-all  focus:outline-none w-32 md:w-full`}
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 name="password"
               />
+              <span onClick={() => setShowPassword(!showPassword)}>
+                {showPassword ? <EyeOpenIcon /> : <EyeClosedIcon />}
+              </span>
             </fieldset>
 
             <div className="mt-[25px] flex justify-end">

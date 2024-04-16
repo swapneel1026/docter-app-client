@@ -83,6 +83,7 @@ const Signin = () => {
             label="Age"
             onChange={(e) => settypeofUser(e.target.value)}
             defaultValue="User"
+            required
           >
             <MenuItem value={"user"}>User</MenuItem>
             <MenuItem value={"docter"}>Docter</MenuItem>

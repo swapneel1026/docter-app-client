@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { Cross2Icon } from "@radix-ui/react-icons";
+import { Cross2Icon, EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 import { getPayload } from "../helperFunctions/getPayload";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,8 @@ import CircleLoader from "./loader";
 const ChangePassword = ({ blur, setBlur }) => {
   const [userDetails] = useState(getPayload());
   const [loader, setLoader] = useState(false);
+  const [showPasswordOld, setShowPasswordOld] = useState(false);
+  const [showPasswordNew, setShowPasswordNew] = useState(false);
   const navigate = useNavigate();
 
   const API_URL =
@@ -104,7 +106,7 @@ const ChangePassword = ({ blur, setBlur }) => {
               </label>
               <input
                 required
-                type="password"
+                type={showPasswordOld ? "text" : "password"}
                 className={`${
                   userDetails?.userType === "User"
                     ? "focus:transition-all focus:ring-teal-600 focus:ring-2 border-teal-600"
@@ -113,6 +115,9 @@ const ChangePassword = ({ blur, setBlur }) => {
                 id="password"
                 name="password"
               />
+              <span onClick={() => setShowPasswordOld(!showPasswordOld)}>
+                {showPasswordOld ? <EyeOpenIcon /> : <EyeClosedIcon />}
+              </span>
             </fieldset>
             <fieldset className="mb-[15px] flex items-center gap-5">
               <label
@@ -123,7 +128,7 @@ const ChangePassword = ({ blur, setBlur }) => {
               </label>
               <input
                 required
-                type="password"
+                type={showPasswordNew ? "text" : "password"}
                 className={`${
                   userDetails?.userType === "User"
                     ? "focus:transition-all focus:ring-teal-600 focus:ring-2 border-teal-600"
@@ -132,6 +137,9 @@ const ChangePassword = ({ blur, setBlur }) => {
                 id="newPassword"
                 name="newPassword"
               />
+              <span onClick={() => setShowPasswordNew(!showPasswordNew)}>
+                {showPasswordNew ? <EyeOpenIcon /> : <EyeClosedIcon />}
+              </span>
             </fieldset>
 
             <div className="mt-[25px] flex justify-end">
