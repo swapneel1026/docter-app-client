@@ -26,14 +26,18 @@ const CreateBooking = () => {
       });
 
       const responseData = await response.json();
+
       if (responseData.success) {
         toast("Booking Successful!");
         navigate("/dashboard");
         setLoader(false);
+      } else {
+        toast(responseData.message);
+        setLoader(false);
       }
     } catch (error) {
       setLoader(false);
-      toast("Error:", error);
+      toast("Error:", error || message);
     }
   };
 
