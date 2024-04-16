@@ -27,7 +27,7 @@ const DeleteBookingButton = ({ handleBookingDelete, bookingId }) => (
             onClick={() => handleBookingDelete(bookingId)}
           >
             <button className="text-red-500 bg-red-100 hover:bg-red-200 focus:shadow-red7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none outline-none transition-all focus:shadow-[0_0_0_2px]">
-              Yes, delete account
+              Yes, delete booking
             </button>
           </AlertDialog.Action>
         </div>
