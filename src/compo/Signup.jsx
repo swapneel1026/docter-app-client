@@ -4,10 +4,12 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import CircleLoader from "./loader";
+import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 
 const Signup = () => {
   const [formType, setFormType] = useState("user");
   const [loader, setLoader] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -91,14 +93,20 @@ const Signup = () => {
             variant="outlined"
             fullWidth
           />
-          <TextField
-            type="password"
-            required
-            name="password"
-            label="Password"
-            variant="outlined"
-            fullWidth
-          />
+          <div className="flex items-center justify-center gap-2">
+            <TextField
+              type={showPassword ? "text" : "password"}
+              required
+              name="password"
+              label="Password"
+              variant="outlined"
+              onChange={(e) => setPassword(e.target.value)}
+              fullWidth
+            />
+            <span onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? <EyeOpenIcon /> : <EyeClosedIcon />}
+            </span>
+          </div>
           {formType === "docter" && (
             <>
               <TextField
