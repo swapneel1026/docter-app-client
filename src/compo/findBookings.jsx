@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, MenuItem, Select } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { getPayload } from "../helperFunctions/getPayload";
@@ -7,6 +7,9 @@ import { toast } from "sonner";
 import CircleLoader from "./loader";
 import BookingFullDetailsDialogue from "./BookingFullDetailsDialogue";
 import DeleteBookingButton from "./DeleteBookingButton";
+import EditBookingButton from "./EditBookingButton";
+import { Pencil2Icon } from "@radix-ui/react-icons";
+import TooltipBox from "./ToolTip";
 
 function FindBookings() {
   const [bookings, setBookings] = useState(null);
@@ -14,6 +17,8 @@ function FindBookings() {
   const [bookingStatus, setBookingStatus] = useState("");
   const [userDetails] = useState(getPayload());
   const [loading, setLoading] = useState(false);
+  const [newChangedDate, setNewChangedDate] = useState("");
+  console.log(newChangedDate);
 
   const navigate = useNavigate();
 
@@ -36,6 +41,7 @@ function FindBookings() {
     const bookingDetails = await res.json();
     setBookings(bookingDetails);
   };
+
   const handleStatusChange = async (bookingId, e) => {
     const newStatus = e.target.value;
     // eslint-disable-next-line no-unused-vars
@@ -64,6 +70,7 @@ function FindBookings() {
       toast("Error updating status:", error.message);
     }
   };
+
   const handleBookingDelete = async (bookingId) => {
     try {
       const res = await fetch(`${API_URL}/api/booking/deletebooking`, {
@@ -75,14 +82,40 @@ function FindBookings() {
         body: JSON.stringify({ bookingId: bookingId }),
       });
       const deletedResponse = await res.json();
+      console.log(deletedResponse);
       if (deletedResponse?.success) {
-        toast(deletedResponse?.msg);
+        // toast(deletedResponse?.msg);
+        // navigate(0);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleBookingTimingChange = async (bookingId) => {
+    try {
+      const res = await fetch(
+        `${API_URL}/api/booking/updatetiming/${bookingId}`,
+        {
+          mode: "cors",
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ dateOfBooking: newChangedDate }),
+          credentials: "include",
+        }
+      );
+      const response = await res.json();
+      if (response?.success) {
+        toast(response.msg);
         navigate(0);
       }
     } catch (error) {
       console.log(error);
     }
   };
+
   useEffect(() => {
     if (!localStorage.getItem("tokenDetails")) {
       navigate("/signin");
@@ -168,7 +201,7 @@ function FindBookings() {
                   >
                     {booking.bookingStatus}
                   </td>
-                  <td className="flex justify-center gap-3 px-4 py-2">
+                  <td className="flex items-center justify-center gap-3 px-4 py-2">
                     <BookingFullDetailsDialogue
                       bookingDetails={booking}
                       userDetails={userDetails}
@@ -177,6 +210,18 @@ function FindBookings() {
                       handleBookingDelete={handleBookingDelete}
                       bookingId={booking?._id}
                     />
+                    {booking.bookingStatus === "Confirmed" ? (
+                      <>
+                        <TooltipBox />
+                      </>
+                    ) : (
+                      <EditBookingButton
+                        handleBookingTimingChange={handleBookingTimingChange}
+                        bookingId={booking?._id}
+                        setNewChangedDate={setNewChangedDate}
+                        newChangedDate={newChangedDate}
+                      />
+                    )}
                   </td>
                 </tr>
               ))}
