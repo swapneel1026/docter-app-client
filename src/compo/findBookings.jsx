@@ -84,8 +84,8 @@ function FindBookings() {
       const deletedResponse = await res.json();
       console.log(deletedResponse);
       if (deletedResponse?.success) {
-        // toast(deletedResponse?.msg);
-        // navigate(0);
+        toast(deletedResponse?.msg);
+        navigate(0);
       }
     } catch (error) {
       console.log(error);
@@ -125,6 +125,11 @@ function FindBookings() {
   useEffect(() => {
     FetchBooking();
   }, [bookingStatus]);
+  useEffect(() => {
+    window.addEventListener("focus", () => {
+      FetchBooking();
+    });
+  }, []);
 
   return (
     <>
