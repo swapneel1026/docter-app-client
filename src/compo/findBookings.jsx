@@ -125,11 +125,6 @@ function FindBookings() {
   useEffect(() => {
     FetchBooking();
   }, [bookingStatus]);
-  useEffect(() => {
-    window.addEventListener("focus", () => {
-      FetchBooking();
-    });
-  }, []);
 
   return (
     <>
