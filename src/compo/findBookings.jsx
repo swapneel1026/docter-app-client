@@ -100,6 +100,7 @@ function FindBookings() {
     } catch (error) {
       toast("Error updating status:", error.message);
     }
+    socket.on("disconnect");
   };
 
   const handleBookingDelete = async (bookingId) => {

@@ -21,7 +21,7 @@ import moment from "moment";
 
 function Navbar() {
   const [userDetails] = useState(getPayload());
-  const { notifications } = useNotifications();
+  const { notifications, setNotifications } = useNotifications();
 
   const pages = [
     {
@@ -100,6 +100,7 @@ function Navbar() {
   };
   const handleCloseNotification = () => {
     setAnchorElNotification(null);
+    setNotifications([]);
   };
 
   return (
@@ -212,29 +213,36 @@ function Navbar() {
                 open={Boolean(anchorElNotification)}
                 onClose={handleCloseNotification}
               >
-                <MenuItem onClick={handleCloseNotification}>
-                  <div className="flex flex-col gap-2">
-                    {notifications?.map(
-                      (
-                        {
-                          previousBookingStatus,
-                          newBookingStatus,
-                          docter,
-                          bookingDate,
-                        },
-                        i
-                      ) => {
-                        return (
-                          <p
-                            key={i}
-                            className="px-3 py-2 text-xs text-white border border-gray-300 rounded-lg bg-slate-400"
-                          >{`Status changed from ${previousBookingStatus} to ${newBookingStatus} by Dr.${docter} for ${moment(
-                            bookingDate
-                          ).format("Do MMM YY")}`}</p>
-                        );
-                      }
-                    )}
-                  </div>
+                <MenuItem
+                  onClick={handleCloseNotification}
+                  className="flex flex-col gap-2"
+                >
+                  {" "}
+                  {notifications?.length === 0 && (
+                    <p className="px-3 py-2 text-xs font-semibold border border-gray-300 rounded-lg text-slate-800 bg-slate-300">
+                      No new notifications
+                    </p>
+                  )}
+                  {notifications?.map(
+                    (
+                      {
+                        previousBookingStatus,
+                        newBookingStatus,
+                        docter,
+                        bookingDate,
+                      },
+                      i
+                    ) => {
+                      return (
+                        <p
+                          key={i}
+                          className="px-3 py-2 text-xs font-semibold border border-gray-300 rounded-lg text-slate-800 bg-slate-300"
+                        >{`Status changed from ${previousBookingStatus} to ${newBookingStatus} by Dr.${docter} for ${moment(
+                          bookingDate
+                        ).format("Do MMM YY")}`}</p>
+                      );
+                    }
+                  )}
                 </MenuItem>
               </Menu>
             </Box>
