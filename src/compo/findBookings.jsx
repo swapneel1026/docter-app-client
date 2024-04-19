@@ -8,8 +8,10 @@ import CircleLoader from "./loader";
 import BookingFullDetailsDialogue from "./BookingFullDetailsDialogue";
 import DeleteBookingButton from "./DeleteBookingButton";
 import EditBookingButton from "./EditBookingButton";
-import { Pencil2Icon } from "@radix-ui/react-icons";
 import TooltipBox from "./ToolTip";
+import { useSocket } from "../hooks/useSocketContext";
+import { useNotifications } from "../hooks/useNotificationContext";
+import moment from "moment";
 
 function FindBookings() {
   const [bookings, setBookings] = useState(null);
@@ -18,9 +20,22 @@ function FindBookings() {
   const [userDetails] = useState(getPayload());
   const [loading, setLoading] = useState(false);
   const [newChangedDate, setNewChangedDate] = useState("");
-  console.log(newChangedDate);
+  const { setNotifications, notifications } = useNotifications();
+
+  const socket = useSocket();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    socket?.emit("newUser", userDetails?.id);
+    socket?.on("getNotification", (data) => {
+      console.log(data, "data");
+      setNotifications((prev) => [...prev, data]);
+    });
+    return () => {
+      socket?.disconnect();
+    };
+  }, [socket, userDetails?.id]);
 
   const API_URL =
     import.meta.env.VITE_ENV === "production"
@@ -42,12 +57,28 @@ function FindBookings() {
     setBookings(bookingDetails);
   };
 
-  const handleStatusChange = async (bookingId, e) => {
+  const handleStatusChange = async (
+    bookingId,
+    e,
+    docterId,
+    previousBookingStatus,
+    bookingDate
+  ) => {
     const newStatus = e.target.value;
+
     // eslint-disable-next-line no-unused-vars
     setBookingStatus((prevStatus) => {
       return newStatus;
     });
+    socket.emit("sendNotification", {
+      recieverId: userDetails?.id,
+      senderId: docterId,
+      previousBookingStatus,
+      newBookingStatus: newStatus,
+      bookingDate,
+      docter: userDetails?.name,
+    });
+
     try {
       const response = await fetch(
         `${API_URL}/api/booking/updatestatus/${bookingId}`,
@@ -65,7 +96,7 @@ function FindBookings() {
         toast("Failed to update status");
       }
       toast("Status updated successfully to " + newStatus);
-      FetchBooking();
+      // FetchBooking();
     } catch (error) {
       toast("Error updating status:", error.message);
     }
@@ -124,7 +155,7 @@ function FindBookings() {
 
   useEffect(() => {
     FetchBooking();
-  }, [bookingStatus]);
+  }, [notifications, bookingStatus]);
 
   return (
     <>
@@ -178,7 +209,7 @@ function FindBookings() {
               {bookings?.data?.map((booking) => (
                 <tr key={booking?._id} className="border-b border-gray-200">
                   <td className="px-4 py-2 text-center">
-                    {new Date(booking?.dateOfBooking).toLocaleDateString()}
+                    {moment(booking?.dateOfBooking).format("Do MMM YY")}
                   </td>
 
                   <td className="px-4 py-2 text-center capitalize">
@@ -279,7 +310,7 @@ function FindBookings() {
               {bookings?.data?.map((booking) => (
                 <tr key={booking?._id} className="border-b border-gray-200">
                   <td className="px-4 py-2 text-center">
-                    {new Date(booking?.dateOfBooking).toLocaleDateString()}
+                    {moment(booking?.dateOfBooking).format("Do MMM YY")}
                   </td>
                   <td className="px-4 py-2 text-center capitalize">
                     {booking?.reasonOfBooking}
@@ -294,7 +325,15 @@ function FindBookings() {
                         id="demo-simple-select-filled"
                         value={booking?.bookingStatus}
                         label="Age"
-                        onChange={(e) => handleStatusChange(booking?._id, e)}
+                        onChange={(e) =>
+                          handleStatusChange(
+                            booking?._id,
+                            e,
+                            booking?.bookedBy?._id,
+                            booking?.bookingStatus,
+                            booking?.dateOfBooking
+                          )
+                        }
                       >
                         <MenuItem value={"Confirmed"}>Confirmed</MenuItem>
                         <MenuItem value={"Pending"}>Pending</MenuItem>

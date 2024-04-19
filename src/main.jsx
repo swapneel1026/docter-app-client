@@ -9,6 +9,10 @@ import Navbar from "./compo/Navbar.jsx";
 import Profile from "./compo/Profile.jsx";
 import { Toaster } from "sonner";
 import LandingPage from "./compo/LandingPage.jsx";
+import { io } from "socket.io-client";
+import { SocketProvider } from "./hooks/useSocketContext.jsx";
+import { NotificationsProvider } from "./hooks/useNotificationContext.jsx";
+
 const router = createBrowserRouter(
   [
     {
@@ -43,8 +47,12 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
-    <Navbar />
-    <Toaster position="top-right" />
-    <RouterProvider router={router} />
+    <SocketProvider>
+      <NotificationsProvider>
+        <Navbar />
+        <Toaster position="top-right" />
+        <RouterProvider router={router} />
+      </NotificationsProvider>
+    </SocketProvider>
   </>
 );

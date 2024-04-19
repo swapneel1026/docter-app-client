@@ -11,12 +11,18 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getPayload } from "../helperFunctions/getPayload";
 import Cookies from "js-cookie";
+import { Badge } from "@mui/material";
+import { NotificationsActive } from "@mui/icons-material";
+import { useNotifications } from "../hooks/useNotificationContext";
+import moment from "moment";
 
 function Navbar() {
   const [userDetails] = useState(getPayload());
+  const { notifications } = useNotifications();
+
   const pages = [
     {
       page: "Home",
@@ -51,7 +57,7 @@ function Navbar() {
   ];
   const settings = [
     {
-      setting: "Profile",
+      setting: "Profiles",
       path: "/profile",
     },
     {
@@ -72,6 +78,7 @@ function Navbar() {
 
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElMenu, setAnchorElMenu] = useState(null);
+  const [anchorElNotification, setAnchorElNotification] = useState(null);
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -84,9 +91,15 @@ function Navbar() {
   const handleOpenMenu = (event) => {
     setAnchorElMenu(event.currentTarget);
   };
+  const handleOpenNotification = (event) => {
+    setAnchorElNotification(event.currentTarget);
+  };
 
   const handleCloseMenu = () => {
     setAnchorElMenu(null);
+  };
+  const handleCloseNotification = () => {
+    setAnchorElNotification(null);
   };
 
   return (
@@ -168,6 +181,64 @@ function Navbar() {
                 )
             )}
           </Box>
+          {userDetails?.userType === "User" && (
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title={`Notifications`}>
+                <IconButton
+                  size="large"
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                  onClick={handleOpenNotification}
+                  sx={{ pr: 5 }}
+                >
+                  <Badge badgeContent={notifications?.length} color="error">
+                    <NotificationsActive />
+                  </Badge>
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                anchorEl={anchorElNotification}
+                id="notifications"
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElNotification)}
+                onClose={handleCloseNotification}
+              >
+                <MenuItem onClick={handleCloseNotification}>
+                  <div className="flex flex-col gap-2">
+                    {notifications?.map(
+                      (
+                        {
+                          previousBookingStatus,
+                          newBookingStatus,
+                          docter,
+                          bookingDate,
+                        },
+                        i
+                      ) => {
+                        return (
+                          <p
+                            key={i}
+                            className="px-3 py-2 text-xs text-white border border-gray-300 rounded-lg bg-slate-400"
+                          >{`Status changed from ${previousBookingStatus} to ${newBookingStatus} by Dr.${docter} for ${moment(
+                            bookingDate
+                          ).format("Do MMM YY")}`}</p>
+                        );
+                      }
+                    )}
+                  </div>
+                </MenuItem>
+              </Menu>
+            </Box>
+          )}
 
           {userDetails && (
             <Box sx={{ flexGrow: 0 }}>
@@ -197,11 +268,7 @@ function Navbar() {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting.setting} onClick={handleCloseUserMenu}>
-                    <Button
-                      href={setting.path}
-                      onClick={setting.action}
-                      textAlign="center"
-                    >
+                    <Button href={setting.path} onClick={setting.action}>
                       {setting.setting}
                     </Button>
                   </MenuItem>
