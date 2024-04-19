@@ -156,6 +156,7 @@ function FindBookings() {
 
   useEffect(() => {
     FetchBooking();
+    FetchBooking();
   }, [notifications, bookingStatus]);
 
   return (
