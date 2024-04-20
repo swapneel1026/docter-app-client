@@ -198,12 +198,12 @@ function Navbar() {
                 </IconButton>
               </Tooltip>
               <Menu
-                sx={{ mt: "45px" }}
+                sx={{ mt: "45px", mr: "15px" }}
                 anchorEl={anchorElNotification}
                 id="notifications"
                 anchorOrigin={{
                   vertical: "top",
-                  horizontal: "right",
+                  horizontal: "left",
                 }}
                 keepMounted
                 transformOrigin={{
@@ -215,7 +215,7 @@ function Navbar() {
               >
                 <MenuItem
                   onClick={handleCloseNotification}
-                  className="flex flex-col gap-2"
+                  className="flex flex-col gap-2 "
                 >
                   {" "}
                   {notifications?.length === 0 && (
@@ -236,7 +236,7 @@ function Navbar() {
                       return (
                         <p
                           key={i}
-                          className="px-3 py-2 text-xs font-semibold border border-gray-300 rounded-lg text-slate-800 bg-slate-300"
+                          className="px-3 py-2 text-[7px] md:text-xs text-wrap font-semibold border border-gray-300 rounded-lg text-slate-800 bg-slate-300"
                         >{`Status changed from ${previousBookingStatus} to ${newBookingStatus} by Dr.${docter} for ${moment(
                           bookingDate
                         ).format("Do MMM YY")}`}</p>
