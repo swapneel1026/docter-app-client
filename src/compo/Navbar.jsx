@@ -285,11 +285,14 @@ function Navbar() {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting.setting} onClick={handleCloseUserMenu}>
-                    <Link to={setting?.path} onClick={setting.action}>
+                  <Link to={setting?.path} onClick={setting.action}>
+                    <MenuItem
+                      key={setting.setting}
+                      onClick={handleCloseUserMenu}
+                    >
                       {setting.setting}
-                    </Link>
-                  </MenuItem>
+                    </MenuItem>
+                  </Link>
                 ))}
               </Menu>
             </Box>
@@ -305,9 +308,11 @@ function Navbar() {
           (page) =>
             page.signinView &&
             page.createBookingView && (
-              <MenuItem key={page.page} onClick={handleCloseMenu}>
-                <Link to={page?.Pagepath}>{page.page}</Link>
-              </MenuItem>
+              <Link to={page?.Pagepath}>
+                <MenuItem key={page.page} onClick={handleCloseMenu}>
+                  <div>{page.page}</div>
+                </MenuItem>
+              </Link>
             )
         )}
       </Menu>
