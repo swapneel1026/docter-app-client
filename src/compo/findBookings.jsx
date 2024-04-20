@@ -202,7 +202,7 @@ function FindBookings() {
             </thead>
             <tbody>
               {bookings?.data?.map((booking) => (
-                <tr key={booking?._id} className="border-b border-gray-200">
+                <tr key={booking?._id} className="border-b border-gray-200 ">
                   <td className="px-4 py-2 text-center">
                     {moment(booking?.dateOfBooking).format("Do MMM YY")}
                   </td>
@@ -227,7 +227,7 @@ function FindBookings() {
                   >
                     {booking.bookingStatus}
                   </td>
-                  <td className="flex items-center justify-center gap-3 px-4 py-2">
+                  <td className="flex items-center justify-center gap-3 px-4 py-6 md:py-2">
                     <BookingFullDetailsDialogue
                       bookingDetails={booking}
                       userDetails={userDetails}
