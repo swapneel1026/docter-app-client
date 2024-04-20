@@ -229,7 +229,7 @@ function Navbar() {
                 >
                   {" "}
                   {notifications?.length === 0 && (
-                    <p className="px-3 py-2 text-xs font-semibold border border-gray-300 rounded-lg text-slate-800 bg-slate-300">
+                    <p className="px-3 py-2 text-[0.625rem] md:text-xs font-semibold border border-gray-300 rounded-lg text-slate-800 bg-slate-300">
                       No new notifications
                     </p>
                   )}
@@ -246,7 +246,7 @@ function Navbar() {
                       return (
                         <p
                           key={i}
-                          className="px-3 py-2 text-[7px] md:text-xs text-wrap font-semibold border border-gray-300 rounded-lg text-slate-800 bg-slate-300"
+                          className="px-3 py-2 text-[0.625rem] md:text-xs text-wrap font-semibold border border-gray-300 rounded-lg text-slate-800 bg-slate-300"
                         >{`Status changed from ${previousBookingStatus} to ${newBookingStatus} by Dr.${docter} for ${moment(
                           bookingDate
                         ).format("Do MMM YY")}`}</p>
