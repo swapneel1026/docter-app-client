@@ -8,7 +8,7 @@ const TooltipBox = () => {
       <Tooltip.Root>
         <Tooltip.Trigger asChild>
           <button>
-            <Pencil2Icon className="hover:cursor-not-allowed" />
+            <Pencil2Icon className="hover:cursor-not-allowed" color="gray" />
           </button>
         </Tooltip.Trigger>
         <Tooltip.Portal>

@@ -1,10 +1,16 @@
 import React from "react";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
+import {
+  DeleteForever,
+  DeleteOutline,
+  DeleteOutlineTwoTone,
+} from "@mui/icons-material";
+import { TrashIcon } from "@radix-ui/react-icons";
 
 const DeleteBookingButton = ({ handleBookingDelete, bookingId }) => (
   <AlertDialog.Root>
     <AlertDialog.Trigger asChild>
-      <button>🗑️</button>
+      <DeleteOutlineTwoTone className="text-red-600 cursor-pointer" />
     </AlertDialog.Trigger>
     <AlertDialog.Portal>
       <AlertDialog.Overlay className="bg-blackA6 data-[state=open]:animate-overlayShow fixed inset-0" />

@@ -10,7 +10,7 @@ const EditBookingButton = ({
 }) => (
   <AlertDialog.Root>
     <AlertDialog.Trigger asChild>
-      <Pencil2Icon role="button" />
+      <Pencil2Icon role="button" color="red" />
     </AlertDialog.Trigger>
     <AlertDialog.Portal>
       <AlertDialog.Overlay className="bg-blackA6 data-[state=open]:animate-overlayShow fixed inset-0" />
