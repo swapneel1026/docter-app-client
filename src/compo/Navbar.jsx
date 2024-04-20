@@ -18,10 +18,20 @@ import { Badge } from "@mui/material";
 import { NotificationsActive } from "@mui/icons-material";
 import { useNotifications } from "../hooks/useNotificationContext";
 import moment from "moment";
+import { Link } from "react-router-dom";
+import { useSocket } from "../hooks/useSocketContext";
 
 function Navbar() {
   const [userDetails] = useState(getPayload());
   const { notifications, setNotifications } = useNotifications();
+  const socket = useSocket();
+
+  useEffect(() => {
+    socket?.on("getNotification", (data) => {
+      console.log(data, "data");
+      setNotifications((prev) => [...prev, data]);
+    });
+  }, [socket]);
 
   const pages = [
     {
@@ -276,9 +286,9 @@ function Navbar() {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting.setting} onClick={handleCloseUserMenu}>
-                    <Button href={setting.path} onClick={setting.action}>
+                    <Link to={setting?.path} onClick={setting.action}>
                       {setting.setting}
-                    </Button>
+                    </Link>
                   </MenuItem>
                 ))}
               </Menu>
@@ -296,7 +306,7 @@ function Navbar() {
             page.signinView &&
             page.createBookingView && (
               <MenuItem key={page.page} onClick={handleCloseMenu}>
-                <Button href={page.Pagepath}>{page.page}</Button>
+                <Link to={page?.Pagepath}>{page.page}</Link>
               </MenuItem>
             )
         )}

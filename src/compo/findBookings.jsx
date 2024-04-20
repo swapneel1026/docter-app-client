@@ -28,13 +28,6 @@ function FindBookings() {
 
   useEffect(() => {
     socket?.emit("newUser", userDetails?.id);
-    socket?.on("getNotification", (data) => {
-      console.log(data, "data");
-      setNotifications((prev) => [...prev, data]);
-    });
-    return () => {
-      socket?.disconnect();
-    };
   }, [socket, userDetails?.id]);
 
   const API_URL =

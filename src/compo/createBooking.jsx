@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import { getPayload } from "../helperFunctions/getPayload";
 import { toast } from "sonner";
 import CircleLoader from "./loader";
+import { useSocket } from "../hooks/useSocketContext";
 
 const CreateBooking = () => {
   const [allDocters, setAllDocters] = useState([]);
@@ -12,6 +13,12 @@ const CreateBooking = () => {
   const [loader, setLoader] = useState(false);
 
   const navigate = useNavigate();
+  const socket = useSocket();
+
+  useEffect(() => {
+    socket?.emit("newUser", userDetails?.id);
+  }, [socket, userDetails?.id]);
+
   const API_URL =
     import.meta.env.VITE_ENV === "production"
       ? import.meta.env.VITE_PROD_BASE_URL
