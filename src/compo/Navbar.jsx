@@ -182,13 +182,14 @@ function Navbar() {
               (page) =>
                 page.signinView &&
                 page.createBookingView && (
-                  <Button
-                    key={page.page}
-                    sx={{ my: 2, color: "white", display: "block" }}
-                    href={page.Pagepath}
-                  >
-                    {page.page}
-                  </Button>
+                  <Link to={page.Pagepath}>
+                    <Button
+                      key={page.page}
+                      sx={{ my: 2, color: "white", display: "block" }}
+                    >
+                      {page.page}
+                    </Button>
+                  </Link>
                 )
             )}
           </Box>
@@ -244,12 +245,14 @@ function Navbar() {
                       i
                     ) => {
                       return (
-                        <p
-                          key={i}
-                          className="px-3 py-2 text-[0.625rem] md:text-xs text-wrap font-semibold border border-gray-300 rounded-lg text-slate-800 bg-slate-300"
-                        >{`Status changed from ${previousBookingStatus} to ${newBookingStatus} by Dr.${docter} for ${moment(
-                          bookingDate
-                        ).format("Do MMM YY")}`}</p>
+                        <Link to={"/dashboard"}>
+                          <p
+                            key={i}
+                            className="px-3 py-2 text-[0.625rem] md:text-xs text-wrap font-semibold border border-gray-300 rounded-lg text-slate-800 bg-slate-300"
+                          >{`Status changed from ${previousBookingStatus} to ${newBookingStatus} by Dr.${docter} for ${moment(
+                            bookingDate
+                          ).format("Do MMM YY")}`}</p>
+                        </Link>
                       );
                     }
                   )}
@@ -310,7 +313,7 @@ function Navbar() {
             page.createBookingView && (
               <Link to={page?.Pagepath}>
                 <MenuItem key={page.page} onClick={handleCloseMenu}>
-                  <div>{page.page}</div>
+                  {page.page}
                 </MenuItem>
               </Link>
             )
