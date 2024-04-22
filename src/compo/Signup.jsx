@@ -58,7 +58,7 @@ const Signup = () => {
         </h1>
         <div className="flex justify-center mb-4 space-x-4">
           <Button
-            variant="contained"
+            variant={formType === "user" ? "contained" : "text"}
             color="inherit"
             onClick={() => setFormType("user")}
             className={formType === "user" ? "bg-teal-600" : ""}
@@ -66,7 +66,7 @@ const Signup = () => {
             User
           </Button>
           <Button
-            variant="contained"
+            variant={formType === "docter" ? "contained" : "text"}
             color="inherit"
             onClick={() => setFormType("docter")}
             className={formType === "docter" ? "bg-teal-600" : ""}
